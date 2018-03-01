@@ -1,0 +1,60 @@
+
+
+  <nav class = "navbar navbar-default fixed-top">
+    <div class = "container-fluid row">
+        <p class = "navbar-text pull-left icon-padding">
+          <a class = "navbar-link" routerLink="..">
+           <span class="glyphicon glyphicon-chevron-left black-color"></span>
+          </a>
+        </p>
+        <p class = "navbar-text pull-right icon-padding">
+          <a class = "navbar-link" (click)="f.ngSubmit.emit()" >
+            <span class = "glyphicon glyphicon-ok black-color"></span>
+          </a>
+        </p>
+        <a class = "navbar-brand bold-font">
+          Widget Edit
+        </a>
+      </div>
+  </nav>
+
+  <div class = "container-fluid">
+    <form (ngSubmit) = "updateOrCreate()" #f = "ngForm">
+      <div class = "form-group">
+        <label class="normal-font" for = "heading-name">Name</label>
+          <input tyle = "text"
+                 class = "form-control"
+                 id = "heading-name"
+                 placeholder = "Name"/>
+        <label class="normal-font" for = "text">Text</label>
+          <input name = "headerText"
+                 type = "text"
+                 class = "form-control"
+                 id = "heading-text"
+                 placeholder = "Text"
+                 ngModel
+                 required
+                 #headerTitle = "ngModel"/>
+        <label class="normal-font" for = "heading-size">Size</label>
+          <input name = "headerSize"
+                 type = "text"
+                 class = "form-control"
+                 id = "heading-size"
+                 placeholder= "3"
+                 ngModel
+                 required
+                 #headerSize = "ngModel"/>
+      </div>
+    </form>
+    <a class = "btn btn-danger btn-block" (click) = "delete()">Delete</a>
+  </div>
+
+  <nav class = "navbar navbar-default navbar-fixed-bottom">
+    <div class = "container-fluid">
+      <p class = "navbar-text pull-right">
+        <a class = "navbar-link icon-padding" routerLink="../../../../../..">
+          <span class = "glyphicon glyphicon-user text-primary"></span>
+        </a>
+      </p>
+    </div>
+  </nav>

@@ -1,0 +1,41 @@
+.black-color {
+  color: black;
+}
+
+.bold-font {
+  font-weight: bold;
+}
+
+.icon-padding {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.hideborder {
+  border-style: hidden;
+}
+
+.white-bg {
+  background-color: white;
+}
+
+.normal-font {
+  font-weight: normal;
+}
+
+.container-padding {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.text-padding {
+  padding-top: 10px;
+}
+
+input {
+  margin-bottom: 5px;
+}
+
+a:link{
+  text-decoration: none;
+}

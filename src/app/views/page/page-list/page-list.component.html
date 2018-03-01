@@ -1,0 +1,38 @@
+
+<body>
+  <nav class = "navbar navbar-default fixed-top">
+    <div class = "container-fluid">
+        <p class = "navbar-text pull-left icon-padding">
+          <a class = "navbar-link" routerLink="../..">
+           <span class="glyphicon glyphicon-chevron-left black-color"></span>
+          </a>
+        </p>
+        <a class = "navbar-brand bold-font">Pages</a>
+        <p class = "navbar-text pull-right icon-padding">
+          <a class = "navbar-link" routerLink="./new" >
+            <span class = "glyphicon glyphicon-plus black-color"></span>
+          </a>
+        </p>
+
+      </div>
+  </nav>
+
+ <div class="container-fluid">
+     <ul class="list-group">
+         <li *ngFor = "let page of pages" class="list-group-item hideborder">
+             <a routerLink="./{{page._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
+             <a routerLink="./{{page._id}}/widget">{{page.name}}</a>
+         </li>
+     </ul>
+ </div>
+
+  <nav class = "navbar navbar-default navbar-fixed-bottom">
+    <div class = "container-fluid">
+      <p class = "navbar-text pull-right">
+        <a class = "navbar-link icon-padding" routerLink="/user/{{userId}}">
+          <span class = "glyphicon glyphicon-user text-primary"></span>
+        </a>
+      </p>
+    </div>
+  </nav>
+

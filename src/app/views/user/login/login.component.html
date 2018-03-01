@@ -1,0 +1,38 @@
+<div *ngIf="errorFlag"
+     class="alert alert-danger">
+  {{errorMsg}}
+
+</div>
+
+
+  <div class = "container-fluid top-padding">
+    <h1>Login</h1>
+    <form (ngSubmit) = "login()" #f="ngForm">
+      <input name = "username"
+           type = "text"
+           class = "form-control"
+           placeholder = "username"
+           ngModel
+           required
+           #username = "ngModel"/>
+
+      <input name="password"
+           type = "password"
+           class = "form-control"
+           placeholder = "password"
+           ngModel
+           required
+           #password = "ngModel"/>
+      <span class="help-block" *ngIf="!username.valid && username.touched">
+              Please enter username!
+      </span>
+      <button class = "btn btn-primary btn-block" type="submit" [disabled]="!f.valid">Login</button>
+      <button routerLink="/register" class = "btn btn-success btn-block">Register</button>
+
+
+    </form>
+
+  </div>
+
+
+

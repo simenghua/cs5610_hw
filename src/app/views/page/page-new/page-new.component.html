@@ -1,0 +1,53 @@
+
+  <nav class = "navbar navbar-default fixed-top">
+    <div class = "container-fluid">
+        <p class = "navbar-text pull-left">
+          <a class = "navbar-link" routerLink="..">
+           <span class="glyphicon glyphicon-chevron-left black-color"></span>
+          </a>
+        </p>
+        <p class = "navbar-text pull-right">
+          <button class = "navbar-link" routerLink=".." (click)="f.ngSubmit.emit()" [disabled]="!f.valid">
+            <span class = "glyphicon glyphicon-ok black-color"></span>
+          </button>
+        </p>
+        <a class = "navbar-brand bold-font">
+          New Page
+        </a>
+    </div>
+  </nav>
+
+  <div class = "container-fluid">
+    <form (ngSubmit) = "newPage()" #f = "ngForm">
+      <div class = "form-group">
+        <label class="normal-font" for = "name">Name</label>
+          <input name = "pageName"
+                 tyle = "text"
+                 class = "form-control"
+                 id = "pageName"
+                 placeholder = "Page Name"
+                 ngModel
+                 required
+                 #pageName = "ngModel"/>
+        <label class="normal-font" for = "title">Title</label>
+          <input name = "pageTitle"
+                 type = "text"
+                 class = "form-control"
+                 id = "pageTitle"
+                 placeholder = "Page Title"
+                 ngModel
+                 #pageTitle = "ngModel"/>
+          <span class="help-block" *ngIf="!pageName.valid && pageName.touched"> Please enter website name! </span>
+      </div>
+    </form>
+  </div>
+
+  <nav class = "navbar navbar-default navbar-fixed-bottom">
+    <div class = "container-fluid">
+      <p class = "navbar-text pull-right">
+        <a class = "navbar-link" routerLink="../../../../">
+          <span class = "glyphicon glyphicon-user text-primary"></span>
+        </a>
+      </p>
+    </div>
+  </nav>

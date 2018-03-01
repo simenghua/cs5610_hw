@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Widget List</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="css/style.css" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+</head>
+
+<body>
+  <nav class = "navbar navbar-default fixed-top">
+    <div class = "container-fluid row">
+        <p class = "navbar-text pull-left icon-padding">
+          <a class = "navbar-link" href = "widget-list.html">
+           <span class="glyphicon glyphicon-chevron-left black-color"></span>
+          </a>
+        </p>
+        <p class = "navbar-text pull-right icon-padding">
+          <a class = "navbar-link" href = "widget-list.html">
+            <span class = "glyphicon glyphicon-ok black-color"></span>
+          </a>
+        </p>
+        <a class = "navbar-brand bold-font" href = "#">
+          Widget Edit
+        </a>
+      </div>
+  </nav>
+
+  <div class = "container-fluid">
+    <form>
+      <div class = "form-group">
+        <label class="normal-font" for = "youtube-name">Name</label>
+         <input tyle = "text"
+                 class = "form-control"
+                 id = "youtube-name"
+                 placeholder = "Name"/>
+        <label class="normal-font" for = "text">Text</label>
+         <input type = "text"
+                 class = "form-control"
+                 id = "youtube-text"
+                 placeholder = "Text"/>
+        <label class="normal-font" for = "url">URL</label>
+         <input type = "text"
+                 class = "form-control"
+                 id = "url-text"
+                 placeholder = "https://s7d2.scene7.com/is/image/PetSmart/ARTHMB-PuppyProofingYourHome-20160818?$AR1104$"/>
+        <label class="normal-font" for = "youtube-width">Width</label>
+         <input type = "text"
+                 class = "form-control"
+                 id = "youtube-width"
+                 placeholder= "100%"/>
+         <label class="normal-font" for="exampleInputFile">Upload</label>
+         <input type="file"
+                class="form-control"
+                id="exampleInputFile"/>
+      </div>
+    </form>
+    <a class = "btn btn-primary btn-block" href = "#">Upload Image</a>
+    <a class = "btn btn-danger btn-block" href = "widget-list.html">Delete</a>
+  </div>
+
+  <nav class = "navbar navbar-default navbar-fixed-bottom">
+    <div class = "container-fluid">
+      <p class = "navbar-text pull-right">
+        <a class = "navbar-link icon-padding" href="../user/profile.html">
+          <span class = "glyphicon glyphicon-user text-primary"></span>
+        </a>
+      </p>
+    </div>
+  </nav>
+
+</body>
+</html>

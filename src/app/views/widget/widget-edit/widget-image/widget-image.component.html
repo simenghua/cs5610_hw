@@ -1,0 +1,74 @@
+
+  <nav class = "navbar navbar-default fixed-top">
+    <div class = "container-fluid row">
+        <p class = "navbar-text pull-left icon-padding">
+          <a class = "navbar-link" routerLink="../">
+           <span class="glyphicon glyphicon-chevron-left black-color"></span>
+          </a>
+        </p>
+        <p class = "navbar-text pull-right icon-padding">
+          <a class = "navbar-link" (click) = "f.ngSubmit.emit()">
+            <span class = "glyphicon glyphicon-ok black-color"></span>
+          </a>
+        </p>
+        <a class = "navbar-brand bold-font">
+          Widget Edit
+        </a>
+      </div>
+  </nav>
+
+  <div class = "container-fluid">
+    <form (ngSubmit) = "updateOrCreate()" #f = "ngForm">
+      <div class = "form-group">
+        <label class="normal-font" for = "youtube-name">Name</label>
+         <input tyle = "text"
+                 class = "form-control"
+                 id = "image-name"
+                 placeholder = "Name"/>
+        <label class="normal-font" for = "text">Text</label>
+         <input  name = "imageText"
+                 type = "text"
+                 class = "form-control"
+                 id = "image-text"
+                 placeholder = "Text"
+                 ngModel
+                 required
+                 #imageText = "ngModel"/>
+        <label class="normal-font" for = "url">URL</label>
+         <input  name = "imageUrl"
+                 type = "text"
+                 class = "form-control"
+                 id = "image-url"
+                 placeholder = "{{widget.url}}"
+                 ngModel
+                 required
+                 #imageUrl = "ngModel"/>
+        <label class="normal-font" for = "youtube-width">Width</label>
+         <input  name = "imageWidth"
+                 type = "text"
+                 class = "form-control"
+                 id = "image-width"
+                 placeholder= "100%"
+                 ngModel
+                 required
+                 #imageWidth = "ngModel"/>
+         <label class="normal-font" for="exampleInputFile">Upload</label>
+         <input type="file"
+                class="form-control"
+                id="exampleInputFile"/>
+      </div>
+    </form>
+    <button class = "btn btn-primary btn-block" >Upload Image</button>
+    <button class = "btn btn-danger btn-block" (click) = "delete()">Delete</button>
+  </div>
+
+  <nav class = "navbar navbar-default navbar-fixed-bottom">
+    <div class = "container-fluid">
+      <p class = "navbar-text pull-right">
+        <a class = "navbar-link icon-padding" routerLink="../../../../../../">
+          <span class = "glyphicon glyphicon-user text-primary"></span>
+        </a>
+      </p>
+    </div>
+  </nav>
+

@@ -1,0 +1,38 @@
+
+<nav class = "navbar bg-primary fixed-top">
+  <div class="container-fluid">
+        <p class="navbar-text pull-left icon-padding">
+           <a routerLink=".." class="navbar-link white-color">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+           </a>
+        </p>
+        <a class="navbar-brand white-color bold-font">
+            Websites
+        </a>
+        <p class="navbar-text pull-right icon-padding">
+           <a routerLink="/user/{{userId}}/website/new" class="navbar-link white-color">
+           <span class="glyphicon glyphicon-plus"></span>
+           </a>
+        </p>
+  </div>
+</nav>
+
+<div  class="container-fluid">
+  <ul class = "list-group hideborder">
+    <li *ngFor = "let website of websites" class="list-group-item hideborder">
+      <a routerLink="./{{website._id}}"><i class="glyphicon glyphicon-cog pull-right"></i></a>
+      <a routerLink="./{{website._id}}/page">{{website.name}}</a>
+    </li>
+  </ul>
+</div>
+
+<nav class="navbar bg-primary navbar-fixed-bottom">
+    <div class="container-fluid">
+       <p class="navbar-text pull-right">
+          <a routerLink="/user/{{userId}}" class="navbar-link white-color">
+             <span class="glyphicon glyphicon-user"></span>
+          </a>
+        </p>
+    </div>
+</nav>
+
