@@ -1,0 +1,48 @@
+<nav class="navbar navbar-default fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text pull-left">
+      <a routerLink=".." class="black-font icon-padding">
+          <span class="glyphicon glyphicon-chevron-left">
+          </span>
+      </a>
+    </div>
+    <div class="navbar-text pull-right">
+      <a class="icon-padding bold-font">
+          <span class="glyphicon glyphicon-ok" (click)="f.ngSubmit.emit()">
+          </span>
+      </a>
+    </div>
+    <a class="navbar-brand bold-font">
+      HTML Edit
+    </a>
+  </div>
+</nav>
+
+<div class="container">
+<form (ngSubmit)="updateOrCreate()" #f="ngForm">
+<div class="form-group">
+  <label for="heading-text">Name</label>
+  <input type="text" class="form-control" id="heading-text" placeholder={{widget.type}}
+         ngModel required
+         name="name" #name="ngModel"/>
+</div>
+<div class="form-group">
+<label for="html-editor">HTML</label>
+<quill-editor [(ngModel)]="text"
+              name="text">
+</quill-editor>
+</div>
+<button class="btn btn-danger btn-block" type="button" (click)="delete()" routerLink="../">Delete</button>
+</form>
+</div>
+
+<nav class="navbar navbar-default fixed-bottom">
+  <div class="container-fluid row">
+    <div class="pull-right navbar-text">
+      <a routerLink="../../../../../.." class="icon-padding">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </div>
+  </div>
+</nav>

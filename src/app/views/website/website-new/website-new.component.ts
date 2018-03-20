@@ -1,8 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {User} from '../../../models/user.model.client';
-import {Website} from '../../../models/website.model.client';
+import {ActivatedRoute, Router} from '@angular/router';
 import {WebsiteService} from '../../../services/website.service.client';
-import {ActivatedRoute} from '@angular/router';
+import {Website} from '../../../models/website.model.client';
 import {NgForm} from '@angular/forms';
 
 @Component({
@@ -11,30 +10,34 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./website-new.component.css']
 })
 export class WebsiteNewComponent implements OnInit {
-  @ViewChild('f') newWebForm: NgForm;
-  user: User;
+  @ViewChild('f') webForm: NgForm;
   userId: String;
-  username: String;
-  website: Website;
-  webId: String;
-  webName: String;
-  description: String;
+  websites: Website[] = [];
 
-  constructor(private webService: WebsiteService,
-              private route: ActivatedRoute) { }
-
-
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.userId = params['uid'];
-    });
+  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   newWebsite() {
-    this.webName = this.newWebForm.value.webName;
-    this.description = this.newWebForm.value.description;
-    const website = new Website(this.webId, this.webName, this.userId, this.description);
-    this.webService.createWebsite(this.userId, website);
+    const new_website = new Website(undefined, this.webForm.value.webname, this.userId, this.webForm.value.description);
+    this.websiteService.createWebsite(this.userId, new_website).subscribe(
+      (returnWebsite: Website) => {
+        console.log(returnWebsite);
+        this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+      }
+    );
+  }
+
+  ngOnInit() {
+
+    this.activatedRoute.params.subscribe(
+      params => {
+        this.websiteService.findWebsiteByUser(params['uid']).subscribe(
+          (returnWebsites: Website[]) => {
+            this.userId = params['uid'];
+            this.websites = returnWebsites;
+          });
+      }
+    );
   }
 
 }

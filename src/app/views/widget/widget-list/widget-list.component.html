@@ -1,81 +1,122 @@
 
-  <nav class = "navbar navbar-default fixed-top">
-    <div class = "container-fluid row">
-        <p class = "navbar-text pull-left icon-padding">
-          <a class = "navbar-link" routerLink="../..">
-           <span class="glyphicon glyphicon-chevron-left black-color"></span>
-          </a>
-        </p>
-        <p class = "navbar-text pull-right icon-padding">
-          <a class = "navbar-link" routerLink="./new">
-            <span class = "glyphicon glyphicon-plus black-color"></span>
-          </a>
-        </p>
-        <a class = "navbar-brand bold-font">
-          Widgets
-        </a>
-      </div>
-  </nav>
 
-  <div *ngFor="let widget of widgets" class = "container-fluid container-padding">
-    <div [ngSwitch]="widget.widgetType">
+<nav class="navbar navbar-default fixed-top">
+  <div class="container-fluid row">
 
-          <div *ngSwitchCase="'HEADER'">
-            <a class = "pull-right">
-              <span class = "glyphicon glyphicon-menu-hamburger black-color"></span>
+    <div class="navbar-text pull-left">
+      <a routerLink="../.." class="black-color icon-padding">
+          <span class="glyphicon glyphicon-chevron-left">
+          </span>
+      </a>
+    </div>
+    <div class="navbar-text pull-right">
+      <a routerLink="./new" class="icon-padding black-color">
+          <span class="glyphicon glyphicon-plus">
+          </span>
+      </a>
+    </div>
+    <a class="navbar-brand bold-font" routerLink=".">
+      Widgets
+    </a>
+  </div>
+</nav>
+
+    <div class="container container-padding">
+      <div appWbdvSortable (newIndexes)="reorderWidgets($event)">
+      <div *ngFor="let widget of widgets">
+        <div [ngSwitch]="widget.widgetType">
+
+          <div *ngSwitchCase="'Text'">
+            <a routerLink="." class="pull-right">
+              <span class="glyphicon glyphicon-menu-hamburger"></span>
             </a>
-            <a class = "pull-right" routerLink="./{{widget._id}}">
-              <span class = "glyphicon glyphicon-cog"></span>
+            <a routerLink="./{{widget._id}}" class="pull-right">
+              <span class="glyphicon glyphicon-cog"></span>
             </a>
-            <h3>{{widget.text}}</h3>
+            <div *ngIf="widget.formatted">
+              <quill-editor [(ngModel)]="widget.text"></quill-editor>
+            </div>
+
+            <input *ngIf="!widget.formatted && (!widget.rows || widget.rows <= 1)"
+                   placeholder="{{widget.placeholder}}"
+                   class="form-control"/>
+
+            <textarea *ngIf="!widget.formatted && (widget.rows > 1)"
+                      rows="{{widget.rows}}"
+                      placeholder="{{widget.placeholder}}"
+                      class="form-control">{{widget.text}}</textarea>
           </div>
 
-          <div *ngSwitchCase="'IMAGE'">
-            <a class = "pull-right">
-              <span class = "glyphicon glyphicon-menu-hamburger black-color white-bg"></span>
-            </a>
-            <a class = "pull-right" routerLink="./{{widget._id}}">
-              <span class = "glyphicon glyphicon-cog white-bg"></span>
-            </a>
-            <img class = "img-rounded img-responsive" style = "width:100%"
-              src={{widget.url}}/>
+          <div *ngSwitchCase="'Html'">
+            <div class="pull-right">
+              <a routerLink="." class="pull-right">
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+              </a>
+              <a routerLink="./{{widget._id}}">
+                <span class="glyphicon glyphicon-cog"></span>
+              </a>
+            </div>
+            <div [innerHtml] = "widget.text"></div>
           </div>
 
-
-
-          <div *ngSwitchCase="'YOUTUBE'">
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe width="640" height="360" [src]=getURL(widget.url) frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-              <a class = "pull-right">
-                <span class = "glyphicon glyphicon-menu-hamburger black-color white-bg"></span>
+          <div *ngSwitchCase="'Heading'">
+            <div class="pull-right">
+              <a routerLink="." class="pull-right">
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
               </a>
-              <a class = "pull-right" routerLink="./{{widget._id}}">
-                <span class = "glyphicon glyphicon-cog white-bg"></span>
+              <a routerLink="./{{widget._id}}">
+                <span class="glyphicon glyphicon-cog"></span>
               </a>
+            </div>
+            <div [ngSwitch]="widget.size">
+              <h1 *ngSwitchCase="1">{{widget.text}}</h1>
+              <h2 *ngSwitchCase="2">{{widget.text}}</h2>
+              <h3 *ngSwitchCase="3">{{widget.text}}</h3>
+              <h4 *ngSwitchCase="4">{{widget.text}}</h4>
+              <h5 *ngSwitchCase="5">{{widget.text}}</h5>
+              <h6 *ngSwitchCase="6">{{widget.text}}</h6>
             </div>
           </div>
 
-    </div>
+          <div *ngSwitchCase="'Youtube'">
+            <div>
+              <a routerLink="." class="pull-right">
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+              </a>
+              <a routerLink="./{{widget._id}}" class="pull-right">
+                <span class="glyphicon glyphicon-cog" ></span>
+              </a>
+              <div class="embed-responsive embed-responsive-16by9">
+                <iframe  class="embed-responsive-item" [src]= getUrl(widget.url)></iframe>
+              </div>
+            </div>
+          </div>
 
+          <div *ngSwitchCase="'Image'">
+            <a routerLink="." class="pull-right">
+              <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </a>
+            <a routerLink="./{{widget._id}}" class="pull-right">
+              <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <img class="img-responsive img-rounded cl-widget-images" src={{widget.url}}>
+          </div>
+
+        </div>
+      </div>
+  </div>
+       <nav class = "navbar navbar-default fixed-bottom">
+          <div class = "container-fluid">
+            <p class = "navbar-text pull-right">
+              <a class = "navbar-link icon-padding" routerLink="../../../../..">
+                <span class = "glyphicon glyphicon-user text-primary"></span>
+              </a>
+            </p>
+          </div>
+        </nav>
   </div>
 
 
-  <nav class = "navbar navbar-default navbar-fixed-bottom">
-    <div class = "container-fluid">
-      <p class = "navbar-text pull-left">
-        <a class = "navbar-link icon-padding">
-          <span class = "glyphicon glyphicon-play black-color"></span>
-        </a>
-      </p>
-      <p class = "navbar-text pull-left">
-        <a class = "navbar-link">
-          <span class = "glyphicon glyphicon-eye-open black-color"></span>
-        </a>
-      </p>
-      <p class = "navbar-text pull-right">
-        <a class = "navbar-link icon-padding" routerLink="../../../../..">
-          <span class = "glyphicon glyphicon-user text-primary"></span>
-        </a>
-      </p>
-    </div>
-  </nav>
+
+
+

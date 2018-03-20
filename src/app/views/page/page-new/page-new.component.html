@@ -1,4 +1,3 @@
-
   <nav class = "navbar navbar-default fixed-top">
     <div class = "container-fluid">
         <p class = "navbar-text pull-left">
@@ -7,7 +6,7 @@
           </a>
         </p>
         <p class = "navbar-text pull-right">
-          <button class = "navbar-link" routerLink=".." (click)="f.ngSubmit.emit()" [disabled]="!f.valid">
+          <button class = "navbar-link" routerLink="../" (click)="f.ngSubmit.emit()" [disabled]="!f.valid">
             <span class = "glyphicon glyphicon-ok black-color"></span>
           </button>
         </p>
@@ -17,27 +16,22 @@
     </div>
   </nav>
 
-  <div class = "container-fluid">
-    <form (ngSubmit) = "newPage()" #f = "ngForm">
-      <div class = "form-group">
-        <label class="normal-font" for = "name">Name</label>
-          <input name = "pageName"
-                 tyle = "text"
-                 class = "form-control"
-                 id = "pageName"
-                 placeholder = "Page Name"
-                 ngModel
-                 required
-                 #pageName = "ngModel"/>
-        <label class="normal-font" for = "title">Title</label>
-          <input name = "pageTitle"
-                 type = "text"
-                 class = "form-control"
-                 id = "pageTitle"
-                 placeholder = "Page Title"
-                 ngModel
-                 #pageTitle = "ngModel"/>
-          <span class="help-block" *ngIf="!pageName.valid && pageName.touched"> Please enter website name! </span>
+  <div class="container">
+    <form (ngSubmit)="newPage()" #f="ngForm">
+      <div class="form-group">
+        <label for="page-name">Name</label>
+        <input type="text" class="form-control" id="page-name" placeholder="Page Name"
+               ngModel required
+               name="name" #name="ngModel"/>
+         <div [hidden]="pagename.valid || pagename.untouched" class="alert alert-danger">
+               Name is required
+         </div>
+      </div>
+      <div class="form-group">
+        <label for="page-title">Title</label>
+        <input type="text" class="form-control" id="page-title" placeholder="Page Title"
+               ngModel required
+               name="title" #title="ngModel"/>
       </div>
     </form>
   </div>

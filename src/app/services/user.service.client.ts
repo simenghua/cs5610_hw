@@ -1,46 +1,56 @@
 import {User} from '../models/user.model.client';
 import {Injectable} from '@angular/core';
+import 'rxjs/Rx';
+import {environment} from '../../environments/environment';
+import {Http, Response} from '@angular/http';
 
 @Injectable()
 export class UserService {
-  users: User[] = [
-    new User('123', 'alice', 'qq', '', '', ''),
-    new User('234', 'bob', 'qq', '', '', ''),
-    new User('345', 'charlie', 'qq', '', '', ''),
-    new User('456', 'jannunzi', 'qq', '', '', '')
-  ];
+  constructor(private http: Http) {
+  }
+
+  baseUrl = environment.baseUrl;
 
   createUser(user: User) {
-    user._id = '' + Math.round(Math.random() * 1000);
-    this.users.push(user);
-  }
-
-  findUserByCredential(username: String, password: String) {
-    return this.users.find(function (user) {
-      return user.username === username && user.password === password;
+    const url = this.baseUrl + '/api/user';
+    return this.http.post(url, user).map((response: Response) => {
+      return response.json();
     });
   }
 
-  findUserById(userId: String) {
-    return this.users.find(function (user) {
-      return user._id === userId;
+  findUserByCredential(username, password) {
+    const url = this.baseUrl + '/api/user/?username=' + username + '&password=' + password;
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
     });
   }
 
-  updateUser(userId, user: User) {
-    const targetuser = this.findUserById(userId);
-    targetuser.username = user.username;
-    targetuser.lastName = user.lastName;
-    targetuser.email = user.email;
-    targetuser.firstName = user.firstName;
+  findUserById(userId) {
+    const url = this.baseUrl + '/api/user/' + userId;
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
+    });
   }
 
-  deleteUser(user: User) {
-    for (const i in this.users) {
-      if (this.users[i]._id === user._id) {
-        const j = +i;
-        this.users.splice(j, 1);
-      }
-    }
+  findUserByUsername(username) {
+    const url = this.baseUrl + '/api/user/?username=' + username;
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
+    });
+  }
+
+  updateUser(userId, user) {
+    const url = this.baseUrl + '/api/user/' + userId;
+    return this.http.put(url, user).map((response: Response) => {
+      return response.json();
+    });
+  }
+
+  deleteUser(userId) {
+    const url = this.baseUrl + '/api/user/' + userId;
+    return this.http.delete(url).map((response: Response) => {
+      return response.json();
+    });
   }
 }
+

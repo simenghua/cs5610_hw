@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {PageService} from '../../../services/page.service.client';
-import {ActivatedRoute} from '@angular/router';
 import {Page} from '../../../models/page.model.client';
 import {NgForm} from '@angular/forms';
 
@@ -10,32 +10,33 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./page-edit.component.css']
 })
 export class PageEditComponent implements OnInit {
-  @ViewChild('f') editForm: NgForm;
-  pageID: String;
-  page: Page;
-  userId: String;
-  pageName: String;
-  pageTitle: String;
-  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute) { }
 
-  updatePage() {
-    if (this.editForm.value.pageName !== '') {
-      this.page.name = this.editForm.value.pageName;
-    }
-    if (this.editForm.value.pageTitle !== '') {
-      this.page.title = this.editForm.value.pageTitle;
-    }
-    this.pageService.updatePage(this.pageID, this.page);
+  @ViewChild('f') pageForm: NgForm;
+  pageId: String;
+  page: Page;
+  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute, private router: Router) { }
+
+  update() {
+    const new_page = new Page(this.pageId, this.pageForm.value.name, this.page.websiteId, this.pageForm.value.title);
+    this.pageService.updatePage(this.pageId, new_page).subscribe(
+      (page: Page) => {
+        this.page = page;
+        this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+      });
   }
 
-  deletePage() {
-    this.pageService.deletePage(this.page._id);
+  delete() {
+    return this.pageService.deletePage(this.pageId).subscribe((returnPage: Page) => {});
   }
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params: any) => {
-      this.userId = params['uid'];
-      this.pageID = params['pid'];
+    this.activatedRoute.paramMap.subscribe(params => {
+      console.log(params.get('pid'));
+      this.pageId = params.get('pid');
+      this.pageService.findPageById(this.pageId).subscribe((page: Page) => {
+          this.page = page;
+        }
+      );
     });
-    this.page = this.pageService.findPageById(this.pageID);
   }
+
 }

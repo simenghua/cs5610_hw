@@ -18,27 +18,32 @@
 
   <h1>Profile</h1>
 
-  <!-- generate message when updated -->
-  <div *ngIf="updatedFlag" class="alert alert-success">
-    {{updatedMsg}}
-  </div>
 
-  <form (ngSubmit) = "updateUser()" #f = "ngForm">
+  <form (ngSubmit) = "update()" #f = "ngForm">
+    <div class="form-group">
       <label for="username">Username</label>
-      <input [(ngModel)]="username" type="text" class="form-control" name="username" placeholder={{username}}/>
+      <input [(ngModel)]="username" required type="text" class="form-control" name="username" placeholder={{username}}/>
+    </div>
 
+    <div>
       <label for="email">Email</label>
-      <input [(ngModel)]="email" type="email" class="form-control" name="email" placeholder={{email}} />
+      <input [(ngModel)]="email" required type="email" class="form-control" name="email" placeholder={{email}} />
+    </div>
 
+    <div>
       <label for="firstName">First Name</label>
-      <input [(ngModel)]="firstName" type="text" class="form-control" name="firstName" placeholder={{firstName}}/>
+      <input [(ngModel)]="firstName" required type="text" class="form-control" name="firstName" placeholder={{firstName}}/>
+    </div>
 
+    <div>
       <label for="lastName">Last Name</label>
-      <input [(ngModel)]="lastName" type="text" class="form-control" name="lastName" placeholder={{lastName}}/>
+      <input [(ngModel)]="lastName" required type="text" class="form-control" name="lastName" placeholder={{lastName}}/>
+    </div>
 
     <br/>
     <button routerLink="/user/{{userId}}/website" class="btn btn-primary btn-block">Websites</button>
-    <button routerLink="/login" class="btn btn-danger btn-block">Log Out</button>
+    <button routerLink="/login" (click)="delete()" class="btn btn-danger btn-block text-white">Delete</button>
+    <button routerLink="/login" class="btn btn-success btn-block">Log Out</button>
 
   </form>
 </div>

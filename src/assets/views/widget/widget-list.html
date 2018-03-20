@@ -1,129 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="initial-scale = 1.25, user-scalable = no">
   <meta charset="UTF-8">
-  <title>Widget List</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="css/style.css" rel="stylesheet"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Widget-list</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
 
 </head>
-
 <body>
-  <nav class = "navbar navbar-default fixed-top">
-    <div class = "container-fluid row">
-        <p class = "navbar-text pull-left icon-padding">
-          <a class = "navbar-link" href = "../page/page-list.html">
-           <span class="glyphicon glyphicon-chevron-left black-color"></span>
-          </a>
-        </p>
-        <p class = "navbar-text pull-right icon-padding">
-          <a class = "navbar-link" href = "widget-chooser.html">
-            <span class = "glyphicon glyphicon-plus black-color"></span>
-          </a>
-        </p>
-        <a class = "navbar-brand bold-font" href = "#">
-          Widgets
+<div class="container-fluid ct-no-padding">
+  <div class="card">
+    <div class="card-header">
+      <a href="../page/page-list.html"><i class="fa fa-chevron-left black-icon" aria-hidden="true"></i></a>
+      <strong class="heading-padding text-muted">Widgets</strong>
+      <a class="float-right" href="widget-choose.html"><i class="fa fa-plus black-icon" aria-hidden="true"></i></a>
+    </div>
+    <div class="card-title title-p">
+      <div class="pull-right setting-p">
+        <a href="widget-heading.html">
+          <span class="fa fa-cog"></span>
         </a>
+        <span class="fa fa-align-justify" aria-hidden="true"></span>
       </div>
-  </nav>
-
-  <div class = "container-fluid container-padding">
-    <div>
-      <a class = "pull-right" href = "#">
-        <span class = "glyphicon glyphicon-menu-hamburger black-color"></span>
-      </a>
-      <a class = "pull-right" href = "widget-heading.html">
-        <span class = "glyphicon glyphicon-cog"></span>
-      </a>
-      <h1>Nunes Memo</h1>
+      <h1>Entertainment</h1>
     </div>
+    <div class="card-group card-p-bottom">
+      <div class="card p-2">
+        <div>
+          <span class="fa fa-align-justify pull-right" aria-hidden="true"></span>
+          <a href="widget-heading.html">
+            <span class="fa fa-cog pull-right"></span>
+          </a>
+          <h4 class="card-title">What Makes Marvel Studios More Successful Than DC?
+          </h4>
+        </div>
+        <div>
+          <div>
+            <span class="fa fa-align-justify pull-right"></span>
+            <a href="widget-image.html">
+              <span class="fa fa-cog pull-right"></span>
+            </a>
+            <img style="width: 100%" src="http://www.letsintern.com/blog/wp-content/uploads/2014/05/marvel.jpeg">
+          </div>
+        </div>
+        <div class="card-block">
+          <div>
+            <span class="fa fa-align-justify pull-right" aria-hidden="true"></span>
+            <a href="#">
+              <span class="fa fa-cog pull-right"></span>
+            </a>
+          </div>
+          <p class="card-text text-ptop" >In two words - Zack Snyder. Zack was selected to helm the
+            effort to bring the DC Comics
+            universe to the silver screen because of his success with adapting two comic books to film: Watchmen and
+            300. He did a fine job with both. He showed a strong visual talent - the ability to take a panel from the
+            page and bring it to life. That made him seem a natural to do it again, for the core DC universe.</p>
+        </div>
+      </div>
 
-    <div>
-      <a class = "pull-right" href = "#">
-        <span class = "glyphicon glyphicon-menu-hamburger black-color"></span>
-      </a>
-      <a class = "pull-right" href = "widget-heading.html">
-        <span class = "glyphicon glyphicon-cog"></span>
-      </a>
-      <h3>Why Were the Democrats So Worried About the Nunes Memo?</h3>
-    </div>
-
-    <div>
-      <a class = "pull-right" href = "#">
-        <span class = "glyphicon glyphicon-menu-hamburger black-color white-bg"></span>
-      </a>
-      <a class = "pull-right" href = "widget-image.html">
-        <span class = "glyphicon glyphicon-cog white-bg"></span>
-      </a>
-      <img class = "img-rounded img-responsive"
-        src="https://media.newyorker.com/photos/5a74e0f56707032064baef02/master/w_1626,c_limit/Davidson-Sorkin-Democrats-Nunes-Memo.jpg">
-    </div>
-
-    <div class="text-padding">
-      <a class = "pull-right" href = "#">
-        <span class = "glyphicon glyphicon-menu-hamburger black-color"></span>
-      </a>
-      <a class = "pull-right" href = "widget-heading.html">
-        <span class = "glyphicon glyphicon-cog"></span>
-      </a>
-      <p>On Friday afternoon, the House Intelligence Committee released what has become known as the Nunes Memo—named for the committee’s chairman, Devin Nunes, who has talked up its contents as though they were the key to a great conspiracy. Some readers will likely see the memo that way, though its revelations are notably thin, to the point of raising questions about why, exactly, the Democrats and the F.B.I. objected so passionately to making it public, adding to the hype along the way.</p>
-    </div>
-
-    <div>
-      <a class = "pull-right" href = "#">
-        <span class = "glyphicon glyphicon-menu-hamburger black-color"></span>
-      </a>
-      <a class = "pull-right" href = "widget-heading.html">
-        <span class = "glyphicon glyphicon-cog"></span>
-      </a>
-      <h3>Trump on Nunes memo</h3>
-    </div>
-
-    <div>
-      <div class="embed-responsive embed-responsive-16by9">
-        <iframe width="640" height="360" src="https://www.youtube.com/embed/kGeNMj3h8Sk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        <a class = "pull-right" href = "#">
-          <span class = "glyphicon glyphicon-menu-hamburger black-color white-bg"></span>
-        </a>
-        <a class = "pull-right" href = "widget-youtube.html">
-          <span class = "glyphicon glyphicon-cog white-bg"></span>
-        </a>
+      <div class="card p-2">
+        <div>
+          <span class="fa fa-align-justify pull-right" aria-hidden="true"></span>
+          <a href="widget-heading.html">
+            <span class="fa fa-cog pull-right"></span>
+          </a>
+        </div>
+        <h4 class="card-title">PUBG Xbox One Update Out Now, Here's What It Does</h4>
+        <div class="card-block">
+          <div>
+            <span class="fa fa-align-justify pull-right"></span>
+            <a href="widget-youtube.html">
+              <span class="fa fa-cog pull-right"></span>
+            </a>
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/K0tXliGLb9U"></iframe>
+            </div>
+          </div>
+          <div>
+            <span class="fa fa-align-justify pull-right"></span>
+            <a href="#">
+              <span class="fa fa-cog pull-right"></span>
+            </a>
+            <p class="card-text text-ptop">Another new PlayerUnknown's Battlegrounds update is available now for Xbox One's early
+              access version of the
+              game. The new patch is primarily focused on vehicles and how much damage they give and take, though it
+              also
+              includes some bug fixes and small enhancements.</p>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="text-padding">
-      <a class = "pull-right" href = "#">
-        <span class = "glyphicon glyphicon-menu-hamburger black-color"></span>
-      </a>
-      <a class = "pull-right" href = "widget-heading.html">
-        <span class = "glyphicon glyphicon-cog"></span>
-      </a>
-      <p>President Trump confirmed on Friday that a controversial Republican memo was declassified and returned to Congress at his order. Trump left no doubt on Friday that <a href="http://www.cnn.com/2018/02/02/politics/rod-rosenstein-donald-trump/index.html">Rosenstein's fate is hanging in the balance</a>, telling reporters "you figure that one out" when they asked him whether he had confidence in Rosenstein, whom he appointed to the job. Democrats fear that Trump could use Rosenstein's approval of an extended surveillance warrant for campaign foreign policy aide Carter Page, that is outlined in the report, as an excuse to fire him.</p>
+    <div class="card-footer">
+      <a class="float-right" href="../user/profile.html"><i class="fa fa-user" aria-hidden="true"></i></a>
     </div>
-
   </div>
 
 
-  <nav class = "navbar navbar-default navbar-fixed-bottom">
-    <div class = "container-fluid">
-      <p class = "navbar-text pull-left">
-        <a class = "navbar-link icon-padding" href="#">
-          <span class = "glyphicon glyphicon-play black-color"></span>
-        </a>
-      </p>
-      <p class = "navbar-text pull-left">
-        <a class = "navbar-link" href="#">
-          <span class = "glyphicon glyphicon-eye-open black-color"></span>
-        </a>
-      </p>
-      <p class = "navbar-text pull-right">
-        <a class = "navbar-link icon-padding" href="../user/profile.html">
-          <span class = "glyphicon glyphicon-user text-primary"></span>
-        </a>
-      </p>
-    </div>
-  </nav>
-
+</div>
 </body>
 </html>
+

@@ -1,21 +1,21 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
-import {UserService} from '../../../services/user.service.client';
 import {NgForm} from '@angular/forms';
+import {UserService} from '../../../services/user.service.client';
+import {Router} from '@angular/router';
 import {User} from '../../../models/user.model.client';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['../../../app.component.css']
 })
 export class RegisterComponent implements OnInit {
   @ViewChild('f') loginForm: NgForm;
-  username: String; // see usage as two-way data binding
-  password: String; // see usage as two-way data binding
+  username: String;
+  password: String;
   verifiedPassword: String;
   errorFlag: boolean;
-  errorMsg = 'Password mismatch';
+  errorMsg: String;
 
   constructor(private userService: UserService, private router: Router) {
   }
@@ -24,17 +24,19 @@ export class RegisterComponent implements OnInit {
     this.username = this.loginForm.value.username;
     this.password = this.loginForm.value.password;
     this.verifiedPassword = this.loginForm.value.verifiedPassword;
-    // alert(this.username);
-    if (this.verifiedPassword !== this.password) {
+    if (this.password !== this.verifiedPassword) {
       this.errorFlag = true;
     } else {
       const user = new User('', this.username, this.password, '', '', '');
-      this.userService.createUser(user);
-      this.router.navigate(['/user', user._id]);
+      this.userService.createUser(user).subscribe((returnUser: User) => {
+        this.router.navigate(['/user', returnUser._id]);
+      });
     }
   }
 
   ngOnInit() {
+    this.errorFlag = false;
+    this.errorMsg = 'Passwords not match!';
   }
 
 }

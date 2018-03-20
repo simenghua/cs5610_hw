@@ -1,33 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import {Widget} from '../../../models/widget.model.client';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {WidgetService} from '../../../services/widget.service.client';
 import {DomSanitizer} from '@angular/platform-browser';
+import {Widget} from '../../../models/widget.model.client';
 
 @Component({
   selector: 'app-widget-list',
   templateUrl: './widget-list.component.html',
-  styleUrls: ['./widget-list.component.css']
+  styleUrls: ['../../../app.component.css']
 })
 export class WidgetListComponent implements OnInit {
+  widgets = [];
+  pageId: String;
 
-  widgets: Widget[] = [];
-  pageID: String;
-  constructor(private activatedRoute: ActivatedRoute, private widgetService: WidgetService,  private domSanitizer: DomSanitizer) { }
+  constructor(private domSanitizer: DomSanitizer, private widgetService: WidgetService, private activatedRoute: ActivatedRoute) {
+  }
 
-  getURL(url: String) {
+  getUrl(url: String) {
     return this.domSanitizer.bypassSecurityTrustResourceUrl(url.toString());
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(
-      (params: any) => {
-        this.pageID = params['pid'];
-      }
-    );
-
-    this.widgets = this.widgetService.findWidgetsByPageId(this.pageID);
+    this.activatedRoute.params
+      .subscribe(
+        params => {
+          return this.widgetService.findWidgetsByPageId(params['pid']).subscribe((returnWidgets: Widget[]) => {
+            this.pageId = params['pid'];
+            this.widgets = returnWidgets;
+          });
+        }
+      );
   }
 
-
+  reorderWidgets(indexes) {
+    // call widget service function to update widget as per index
+    this.widgetService.reorderWidgets(indexes.startIndex, indexes.endIndex, this.pageId)
+      .subscribe(
+        (data) => console.log(data)
+      );
+  }
 }

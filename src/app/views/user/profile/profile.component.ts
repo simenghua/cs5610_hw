@@ -1,49 +1,56 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
-import {User} from '../../../models/user.model.client';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import {User} from '../../../models/user.model.client';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['../../../app.component.css']
 })
 export class ProfileComponent implements OnInit {
   @ViewChild('f') loginForm: NgForm;
-  user: User;
   userId: String;
+  user: User;
   username: String;
-  password: String;
   email: String;
   firstName: String;
   lastName: String;
 
-
-  constructor(private userService: UserService,
-              private route: ActivatedRoute) {
-  }
-
-  updateUser() {
-    this.user._id = this.userId;
-    this.user.username = this.loginForm.value.username;
-    this.user.email = this.loginForm.value.email;
-    this.user.firstName = this.loginForm.value.firstName;
-    this.user.lastName = this.loginForm.value.lastName;
-    this.userService.updateUser(this.userId, this.user);
+  constructor(private userService: UserService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      // alert('userId is' + this.userId);
-      this.user = this.userService.findUserById(params['uid']);
+    this.activatedRoute.params.subscribe(params => {
+      return this.userService.findUserById(params['uid']).subscribe(
+        (returnUser: User) => {
+          this.userId = params['uid'];
+          this.user = returnUser;
+          this.username = this.user.username;
+          this.email = this.user.email;
+          this.firstName = this.user.firstName;
+          this.lastName = this.user.lastName;
+          this.email = this.user.email;
+        }
+      );
     });
-    this.userId = this.user._id;
-    this.username = this.user.username;
-    this.password = this.user.password;
-    this.firstName = this.user.firstName;
-    this.lastName = this.user.lastName;
-    this.email = this.user.email;
+
+  }
+
+  update() {
+    this.user.username = this.loginForm.value.username;
+    this.user.firstName = this.loginForm.value.firstName;
+    this.user.lastName = this.loginForm.value.lastName;
+    this.user.email = this.loginForm.value.email;
+    this.userService.updateUser(this.userId, this.user).subscribe((returnUser: User) => {
+      this.router.navigate(['/user', returnUser._id]);
+    });
+  }
+
+  delete() {
+    this.userService.deleteUser(this.userId).subscribe((returnUser: User) => {
+      this.router.navigate(['/login']);
+    });
   }
 }
-

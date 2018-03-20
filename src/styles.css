@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+@media (max-width: 992px) {
+  .hide-section {
+    display: none;
+  }
+  .card-footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  .card{
+    border: none;
+  }
+}
+@media (min-width: 992px) {
+  .show-section {
+    display: none;
+  }
+}
+input, textarea{
+  margin-bottom: 10px;
+}
+
+.heading-padding{
+  padding-left:5px;
+}
+.ct-no-padding{
+  padding: 0;
+}
+.no-frame-padding{
+  padding: 50px;
+}
+.black-icon{
+  color: black;
+}
+.white-icon{
+  color: white;
+}

@@ -1,82 +1,76 @@
-
-<nav class = "navbar bg-primary fixed-top">
-  <div class = "row">
+<nav class="navbar bg-primary fixed-top">
+  <div class="row">
     <div class="col-sm-4 col-md-4 col-lg-4 hidden-xs">
       <div class="container-fluid">
-                <p class="navbar-text pull-left">
-                   <a routerLink="/profile/{{userId}}/website" class="navbar-link white-color">
-                      <span class="glyphicon glyphicon-chevron-left"></span>
-                   </a>
-                </p>
-                <a class="navbar-brand white-color bold-font">
-                    Websites
-                </a>
-                <p class="navbar-text pull-right">
-                   <a routerLink="/user/{{userId}}/website/new" class="navbar-link white-color">
-                   <span class="glyphicon glyphicon-plus"></span>
-                   </a>
-                </p>
-            </div>
+        <p class="navbar-text pull-left">
+            <a routerLink="/user/{{userId}}/website" class="navbar-link white-color">
+               <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+        </p>
+        <a class="navbar-brand white-color bold-font">
+          Websites
+        </a>
+        <p class="navbar-text pull-right">
+          <a routerLink="/user/{{userId}}/website/new" class="navbar-link white-color">
+            <span class="glyphicon glyphicon-plus"></span>
+          </a>
+        </p>
+      </div>
     </div>
 
-    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+    <div class="col-xs-8">
       <div class="container-fluid">
-                <p class="navbar-text pull-left icon-padding">
-                   <a routerLink="/user/{{userId}}/website" class="navbar-link white-color hidden-sm hidden-md hidden-lg">
-                      <span class="glyphicon glyphicon-chevron-left"></span>
-                   </a>
-                </p>
-                <a class="navbar-brand white-color bold-font">
-                    Edit Website
-                </a>
-
-                <p class="navbar-text pull-right icon-padding">
-                   <button routerLink="/user/{{userId}}/website" class="navbar-link white-color" (click)="f.ngSubmit.emit()" [disabled]="!f.valid">
-                   <span class="glyphicon glyphicon-ok"></span>
-                   </button>
-                </p>
-
-          </div>
+          <p class="navbar-text pull-left icon-padding">
+             <a routerLink="/user/{{userId}}/website" class="navbar-link white-color hidden-sm hidden-md hidden-lg">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+             </a>
+          </p>
+        <a class="white-color navbar-brand bold-font">
+          Edit Websites
+        </a>
+        <a class="navbar-link navbar-text pull-right white-color icon-padding">
+          <span class="glyphicon glyphicon-ok" (click)="update()"></span>
+        </a>
+      </div>
     </div>
   </div>
 </nav>
 
-<div class="row">
-  <div *ngFor = "let website of websites" class="col-sm-4 col-md-4 col-lg-4 hidden-xs">
-    <ul class = "list-group">
-          <li class="list-group-item hideborder">
-            <a routerLink="/user/{{userId}}/website/{{webId}}/page">{{website.name}}</a>
-            <a routerLink="/user/{{userId}}/website/{{webId}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-          </li>
+<div class="contain-fluid">
+  <div class="col-sm-4 col-md-4 col-lg-4 hidden-xs">
+  <div *ngFor = "let website of websites" >
+    <ul class="list-group hideborder">
+        <li  class="list-group-item hideborder">
+          <a routerLink="../{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
+          <a routerLink="../{{website._id}}/page">{{website.name}}</a>
+        </li>
     </ul>
   </div>
+  </div>
 
-  <div class = "col-xs-12 col-sm-8 col-md-8 col-lg-8">
-    <div class = "container-fluid">
-      <form (ngSubmit) = "updateWebsite()" #f = "ngForm">
-        <div class = "form-group">
-          <label for = "website-name">Website Name</label>
-          <input name = "webName"
-                 type = "text"
-                 class = "form-control"
-                 id = "website-name"
-                 placeholder = "{{website.name}}"
-                 ngModel
-                 required
-                 #webName = "ngModel"/>
-          <span class="help-block" *ngIf="!webName.valid && webName.touched"> Please enter website name! </span>
+  <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+    <form (ngSubmit)="delete()" #f="ngForm">
+      <div class="form-group">
+        <label class="cl-8-top" for="website-name">Website Name</label>
+        <input type="text" class="form-control" id="website-name" placeholder={{website.name}}
+               ngModel required
+               name="webname" #webname="ngModel"/>
+        <div [hidden]="webname.valid || webname.untouched"
+             class="alert alert-danger">
+          Name is required
         </div>
-        <div class = "form-group">
-          <label for = "web-description">Website Description</label>
-          <textarea name = "description" class = "form-control" id = "website-description" rows = "5" ngModel #desription = "ngModel"
-            placeholder = "{{website.description}}"></textarea>
-        </div>
-      </form>
-      <button class="btn btn-danger btn-block" routerLink="/user/{{userId}}/website" (click) = "deleteWebsite()">Delete</button>
-    </div>
+      </div>
+      <div class="form-group">
+        <label for="website-description">Website Description</label>
+        <textarea id="website-description" class="form-control" rows="5"
+                  placeholder={{website.description}}
+                  ngModel required
+                  name="description" #description="ngModel"></textarea>
+      </div>
+      <button class="btn btn-danger btn-block" type="button" routerLink="../"(click)="delete()">Delete</button>
+    </form>
   </div>
 </div>
-
 
 <nav class="navbar bg-primary navbar-fixed-bottom">
     <div class="container-fluid">

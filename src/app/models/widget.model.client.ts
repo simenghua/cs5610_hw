@@ -4,18 +4,22 @@ export class Widget {
   pageId: String;
   size: String;
   text: String;
-  url: String;
   width: String;
+  url: String;
+  rows: number;
+  placeholder: String;
+  formatted: boolean;
 
-  constructor(_id, type, pageId, size= '1', text = 'text', width = '100%', url = 'url') {
+  constructor(_id, widgetType, pageId, size, text, width, url, rows = 1, placeholder = 'place', formatted = false) {
     this._id = _id;
-    this.widgetType = type;
-    this.pageId = pageId;
+    this.widgetType = widgetType;
     this.size = size;
+    this.pageId = pageId;
     this.url = url;
     this.width = width;
     this.text = text;
+    this.rows = rows;
+    this.placeholder = placeholder;
+    this.formatted = formatted;
   }
 }
-
-

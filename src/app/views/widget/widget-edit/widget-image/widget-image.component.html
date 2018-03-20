@@ -1,5 +1,4 @@
-
-  <nav class = "navbar navbar-default fixed-top">
+ <nav class = "navbar navbar-default fixed-top">
     <div class = "container-fluid row">
         <p class = "navbar-text pull-left icon-padding">
           <a class = "navbar-link" routerLink="../">
@@ -26,40 +25,39 @@
                  id = "image-name"
                  placeholder = "Name"/>
         <label class="normal-font" for = "text">Text</label>
-         <input  name = "imageText"
-                 type = "text"
+         <input  [(ngModel)] = "imageText"
                  class = "form-control"
-                 id = "image-text"
-                 placeholder = "Text"
-                 ngModel
-                 required
-                 #imageText = "ngModel"/>
+                 name="imageText"
+                 placeholder = "{{text}}"
+                 type="text"
+         />
         <label class="normal-font" for = "url">URL</label>
-         <input  name = "imageUrl"
-                 type = "text"
+         <input  [(ngModel)] = "imageUrl"
+                  value="{{imageUrl}}"
                  class = "form-control"
-                 id = "image-url"
-                 placeholder = "{{widget.url}}"
-                 ngModel
-                 required
-                 #imageUrl = "ngModel"/>
+                 name="imageUrl"
+                 placeholder = "{{imageUrl}}"
+                 type="url"
+         />
         <label class="normal-font" for = "youtube-width">Width</label>
-         <input  name = "imageWidth"
-                 type = "text"
+         <input  [(ngModel)] = "imageWidth"
                  class = "form-control"
-                 id = "image-width"
-                 placeholder= "100%"
-                 ngModel
-                 required
-                 #imageWidth = "ngModel"/>
+                 name="imageWidth"
+                 placeholder = "{{width}}"
+                 type="text"
+         />
          <label class="normal-font" for="exampleInputFile">Upload</label>
-         <input type="file"
-                class="form-control"
-                id="exampleInputFile"/>
+         <form ngNoForm action="{{baseUrl}}/api/upload" method="post" enctype="multipart/form-data">
+          <input  name="myFile"   type="file" class="form-control"/>
+          <input  name="widgetId" value="{{widgetId}}"   style="display: none"/>
+          <input  name="websiteId" value="{{websiteId}}"   style="display: none"/>
+          <input  name="pageId" value="{{pageId}}"   style="display: none"/>
+          <input  name="userId" value="{{userId}}"   style="display: none"/>
+          <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
+         </form>
       </div>
     </form>
-    <button class = "btn btn-primary btn-block" >Upload Image</button>
-    <button class = "btn btn-danger btn-block" (click) = "delete()">Delete</button>
+    <button class = "btn btn-danger btn-block" (click) = "delete()" routerLink="../">Delete</button>
   </div>
 
   <nav class = "navbar navbar-default navbar-fixed-bottom">
@@ -71,4 +69,3 @@
       </p>
     </div>
   </nav>
-
