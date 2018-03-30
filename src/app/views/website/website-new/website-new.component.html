@@ -29,7 +29,7 @@
             New Website
         </a>
         <p class="navbar-text pull-right">
-           <a routerLink="/user/{{userId}}/website" class="navbar-link white-color icon-padding" (click)="f.ngSubmit.emit()">
+           <a class="navbar-link white-color icon-padding" (click)="newWebsite()">
            <span class="glyphicon glyphicon-ok"></span>
            </a>
         </p>
@@ -52,11 +52,10 @@
   </div>
 
 <div class = "col-xs-12 col-lg-8 col-sm-8 col-md-8">
-  <form (ngSubmit) = "newWebsite()" #f = "ngForm">
+  <form>
     <div class = "form-group">
       <label for = "website-name">Name</label>
-      <input
-      [(ngModel)] = "webname"
+      <input [(ngModel)] = "website.name"
              name = "webname"
              type = "text"
              class = "form-control"
@@ -64,7 +63,8 @@
     </div>
     <div class = "form-group">
       <label for = "web-description">Description</label>
-      <textarea class = "form-control" id = "website-description"
+      <textarea [(ngModel)] = "website.description" name = "description"
+      class = "form-control" id = "website-description"
         placeholder = "Description" rows = "5"></textarea>
       </div>
   </form>

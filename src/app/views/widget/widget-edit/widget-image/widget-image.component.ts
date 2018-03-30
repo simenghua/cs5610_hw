@@ -2,22 +2,21 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Widget} from '../../../../models/widget.model.client';
 import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-widget-image',
   templateUrl: './widget-image.component.html',
-  styleUrls: ['../../../../app.component.css']
+  styleUrls: ['./widget-image.component.css']
 })
 export class WidgetImageComponent implements OnInit {
 
   @ViewChild('f') widgetForm: NgForm;
   pageId: String;
   widgetId: String;
-  widget: Widget;
+  widget = {type: 'Image'};
   text: String;
-  imageUrl: String;
+  url: String;
   width: String;
   userId: String;
   websiteId: String;
@@ -35,37 +34,23 @@ export class WidgetImageComponent implements OnInit {
           this.pageId = params['pid'];
           this.widgetId = params['wgid'];
           if (this.widgetId !== undefined) {
-            return this.widgetService.findWidgetById(params['wgid']).subscribe((returnWidget: Widget) => {
+            return this.widgetService.findWidgetById(params['wgid']).subscribe((returnWidget: any) => {
               this.widget = returnWidget;
-              this.text = this.widget.text;
-              this.imageUrl = this.widget.url;
-              this.width = this.widget.width;
             });
           } else {
-            this.widget = new Widget('', '', '', '', '', '', '');
-            this.text = this.widget.text;
-            this.imageUrl = this.widget.url;
-            this.width = this.widget.width;
+        //    console.log(this.widget);
           }
         }
       );
   }
 
-
   updateOrCreate() {
     if (this.widgetId !== undefined) {
-      this.widget.text = this.widgetForm.value.imageText;
-      this.widget.width = this.widgetForm.value.imageWidth;
-      this.widget.url = this.widgetForm.value.imageUrl;
-      return this.widgetService.updateWidget(this.widgetId, this.widget).subscribe((returnWidget: Widget) => {
+      return this.widgetService.updateWidget(this.widgetId, this.widget).subscribe((returnWidget: any) => {
         this.router.navigate(['../'], {relativeTo: this.activatedRoute});
       });
     } else {
-      this.widget.text = this.widgetForm.value.imageText;
-      this.widget.width = this.widgetForm.value.imageWidth;
-      this.widget.url = this.widgetForm.value.imageUrl;
-      this.widget.widgetType = 'Image';
-      return this.widgetService.createWidget(this.pageId, this.widget).subscribe((returnWidget: Widget) => {
+      return this.widgetService.createWidget(this.pageId, this.widget).subscribe((returnWidget: any) => {
         this.widget = returnWidget;
         this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
       });
@@ -74,11 +59,13 @@ export class WidgetImageComponent implements OnInit {
 
   delete() {
     if (this.widgetId !== undefined) {
-      return this.widgetService.deleteWidget(this.widgetId).subscribe((returnWidget: Widget) => {
+      return this.widgetService.deleteWidget(this.widgetId).subscribe((returnWidget: any) => {
+        this.router.navigate(['../'], {relativeTo: this.activatedRoute});
       });
     } else {
       this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
     }
   }
+
 
 }

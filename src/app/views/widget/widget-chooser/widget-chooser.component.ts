@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {WidgetService} from '../../../services/widget.service.client';
 import {ActivatedRoute} from '@angular/router';
-import {Widget} from '../../../models/widget.model.client';
 
 @Component({
   selector: 'app-widget-chooser',
@@ -10,7 +9,7 @@ import {Widget} from '../../../models/widget.model.client';
 })
 export class WidgetChooserComponent implements OnInit {
 
-  widgets: Widget[] = [];
+  widgets: any[];
   pageId: String;
 
   constructor(private activatedRoute: ActivatedRoute, private widgetService: WidgetService) {
@@ -25,7 +24,7 @@ export class WidgetChooserComponent implements OnInit {
     );
 
     this.widgetService.findWidgetsByPageId(this.pageId).subscribe(
-      (widgets: Widget[]) => {
+      (widgets: any) => {
         this.widgets = widgets;
       }
     );

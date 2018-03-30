@@ -40,6 +40,11 @@
       <input [(ngModel)]="lastName" required type="text" class="form-control" name="lastName" placeholder={{lastName}}/>
     </div>
 
+    <div>
+      <label for="phone">Phone</label>
+      <input [(ngModel)]="phone" required type="text" class="form-control" name="phone" placeholder={{phone}}/>
+    </div>
+
     <br/>
     <button routerLink="/user/{{userId}}/website" class="btn btn-primary btn-block">Websites</button>
     <button routerLink="/login" (click)="delete()" class="btn btn-danger btn-block text-white">Delete</button>

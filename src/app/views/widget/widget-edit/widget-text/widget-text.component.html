@@ -2,15 +2,15 @@
   <div class="container-fluid row">
 
     <div class="navbar-text pull-left">
-      <a routerLink=".." class="cl-text-black cl-icon-padding">
+      <a routerLink=".." class="black-color icon-padding">
           <span class="glyphicon glyphicon-chevron-left">
           </span>
       </a>
     </div>
     <div class="navbar-text pull-right">
-      <a class="cl-icon-padding cl-text-black">
-        <button class="glyphicon glyphicon-ok" (click)="f.ngSubmit.emit()">
-        </button>
+      <a class="icon-padding black-color">
+        <span class="glyphicon glyphicon-ok" (click)="f.ngSubmit.emit()">
+        </span>
       </a>
     </div>
     <a class="navbar-brand  bold-font">
@@ -19,16 +19,19 @@
   </div>
 </nav>
 
-<div class="container">
+<div class="container-fluid">
   <form (ngSubmit)="updateOrCreate()" #f="ngForm">
 
     <div class="form-group">
       <label for="heading-text">Text</label>
-      <input [(ngModel)]="widget.text"name="text" class="form-control" id="heading-text"/>
+      <input [(ngModel)]="widget.text"
+              name="text"
+              class="form-control"
+              id="heading-text"/>
     </div>
     <div class="form-group">
       <label for="heading-rows">Rows</label>
-      <input  [(ngModel)] = "rows"
+      <input  [(ngModel)] = "widget.rows"
                class = "form-control"
                name="rows"
                placeholder = "{{rows}}"
@@ -36,7 +39,7 @@
     </div>
     <div class="form-group">
       <label for="heading-placeholder">Placeholder</label>
-      <input [(ngModel)] = "placeholder"
+      <input [(ngModel)] = "widget.placeholder"
              class = "form-control"
              name="placeholder"
              placeholder = "{{placeholder}}"
@@ -44,20 +47,20 @@
     </div>
     <div class="input-group">
       <label for="heading-formatted">Formatted</label>
-      <input [(ngModel)] = "formatted"
+      <input [(ngModel)] = "widget.formatted"
              class = "form-control"
              name="formatted"
              placeholder = "{{formatted}}"
              type="checkbox"/>
     </div>
-    <button class="btn btn-danger btn-block" type="button" (click)="delete()" routerLink="../">Delete</button>
+    <button class="btn btn-danger btn-block" type="button" (click)="delete()">Delete</button>
   </form>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid row">
     <div class="pull-right navbar-text">
-      <a routerLink="../../../../../.." class="cl-icon-padding">
+      <a routerLink="/user/{{userId}}" class="icon-padding">
         <span class="glyphicon glyphicon-user"></span>
       </a>
     </div>

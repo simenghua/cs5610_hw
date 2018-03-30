@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Widget} from '../models/widget.model.client';
 import {environment} from '../../environments/environment';
 import {Http, Response} from '@angular/http';
 
@@ -10,7 +9,7 @@ export class WidgetService {
 
   baseUrl = environment.baseUrl;
 
-  createWidget(pageId: String, widget: Widget) {
+  createWidget(pageId, widget) {
     const url = this.baseUrl + '/api/page/' + pageId + '/widget';
     return this.http.post(url, widget).map((response: Response) => {
       return response.json();
@@ -31,7 +30,7 @@ export class WidgetService {
     });
   }
 
-  updateWidget(widgetId: String, widget: Widget) {
+  updateWidget(widgetId, widget) {
     const url = this.baseUrl + '/api/widget/' + widgetId;
     return this.http.put(url, widget).map((response: Response) => {
       return response.json();
@@ -46,8 +45,8 @@ export class WidgetService {
   }
 
   reorderWidgets(startIndex, endIndex, pageId) {
-
     const url = this.baseUrl + '/api/page/' + pageId + '/widget?start=' + startIndex + '&end=' + endIndex;
+    console.log(url);
     return this.http.put(url, '')
       .map(
         (res: Response) => {

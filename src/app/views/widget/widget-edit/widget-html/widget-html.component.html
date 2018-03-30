@@ -23,24 +23,23 @@
 <form (ngSubmit)="updateOrCreate()" #f="ngForm">
 <div class="form-group">
   <label for="heading-text">Name</label>
-  <input type="text" class="form-control" id="heading-text" placeholder={{widget.type}}
-         ngModel required
-         name="name" #name="ngModel"/>
+  <input type="text" class="form-control" id="heading-text" placeholder="{{widget.type}}"
+         name="name" [(ngModel)] = "widget.name"/>
 </div>
 <div class="form-group">
 <label for="html-editor">HTML</label>
-<quill-editor [(ngModel)]="text"
+<quill-editor [(ngModel)]="widget.text"
               name="text">
 </quill-editor>
 </div>
-<button class="btn btn-danger btn-block" type="button" (click)="delete()" routerLink="../">Delete</button>
+<button class="btn btn-danger btn-block" type="button" (click)="delete()">Delete</button>
 </form>
 </div>
 
-<nav class="navbar navbar-default fixed-bottom">
+<nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid row">
     <div class="pull-right navbar-text">
-      <a routerLink="../../../../../.." class="icon-padding">
+      <a routerLink="/user/{{userId}}" class="icon-padding">
         <span class="glyphicon glyphicon-user"></span>
       </a>
     </div>

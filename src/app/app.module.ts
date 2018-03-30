@@ -27,9 +27,12 @@ import { WidgetEditComponent } from './views/widget/widget-edit/widget-edit.comp
 import {WidgetHeadingComponent} from './views/widget/widget-edit/widget-heading/widget-heading.component';
 import {WidgetImageComponent} from './views/widget/widget-edit/widget-image/widget-image.component';
 import {WidgetYoutubeComponent} from './views/widget/widget-edit/widget-youtube/widget-youtube.component';
-import { WbdvSortableDirective } from './views/widget/widget-list/wbdv-sortable.directive';
+import { WebdvSortableDirective } from './views/widget/widget-list/webdv-sortable.directive';
 import { WidgetTextComponent } from './views/widget/widget-edit/widget-text/widget-text.component';
 import { WidgetHtmlComponent } from './views/widget/widget-edit/widget-html/widget-html.component';
+import { FlickrImageSearchComponent } from './views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
+import {FlickrService} from './services/flickr.service.client';
+import {OrderByPipe} from './views/widget/widget-list/order-by-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -49,9 +52,11 @@ import { WidgetHtmlComponent } from './views/widget/widget-edit/widget-html/widg
     WidgetYoutubeComponent,
     WidgetChooserComponent,
     WidgetEditComponent,
-    WbdvSortableDirective,
+    WebdvSortableDirective,
     WidgetTextComponent,
     WidgetHtmlComponent,
+    FlickrImageSearchComponent,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,
@@ -60,7 +65,7 @@ import { WidgetHtmlComponent } from './views/widget/widget-edit/widget-html/widg
     HttpModule,
     QuillEditorModule
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService, {provide: APP_BASE_HREF, useValue: '/'}],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService, {provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

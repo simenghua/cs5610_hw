@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {NgForm} from '@angular/forms';
-import {Widget} from '../../../../models/widget.model.client';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -12,10 +11,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class WidgetHtmlComponent implements OnInit {
 
   @ViewChild('f') widgetForm: NgForm;
+  userId: String;
   pageId: String;
   wgid: String;
-  widget: Widget;
-  text: String;
+  widget = {type: 'Html'};
 
 
 
@@ -28,14 +27,13 @@ export class WidgetHtmlComponent implements OnInit {
         params => {
           this.wgid = params['wgid'];
           this.pageId = params['pid'];
+          this.userId = params['uid'];
           if (this.wgid !== undefined) {
-            return this.widgetService.findWidgetById(this.wgid).subscribe((returnWidget: Widget) => {
+            return this.widgetService.findWidgetById(this.wgid).subscribe((returnWidget: any) => {
               this.widget = returnWidget;
-              this.text = this.widget.text;
             });
           } else {
-            this.widget = new Widget('', 'Html', '', '', '', '', '', 0, '', false);
-            this.text = this.widget.text;
+          //  console.log(this.widget);
           }
         }
       );
@@ -44,15 +42,14 @@ export class WidgetHtmlComponent implements OnInit {
 
 
   updateOrCreate() {
-    this.widget.text = this.widgetForm.value.text;
-    this.widget.widgetType = 'Html';
     if (this.wgid !== undefined) {
-      return this.widgetService.updateWidget(this.wgid, this.widget).subscribe((returnWidget: Widget) => {
+      return this.widgetService.updateWidget(this.wgid, this.widget).subscribe((returnWidget: any) => {
         this.router.navigate(['../'], {relativeTo: this.activatedRoute});
       });
     } else {
-      return this.widgetService.createWidget(this.pageId, this.widget).subscribe((returnWidget: Widget) => {
+      return this.widgetService.createWidget(this.pageId, this.widget).subscribe((returnWidget: any) => {
         this.widget = returnWidget;
+        console.log(this.widget);
         this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
       });
     }
@@ -60,7 +57,8 @@ export class WidgetHtmlComponent implements OnInit {
 
   delete() {
     if (this.wgid !== undefined) {
-      return this.widgetService.deleteWidget(this.wgid).subscribe((returnWidget: Widget) => {
+      return this.widgetService.deleteWidget(this.wgid).subscribe((returnWidget: any) => {
+        this.router.navigate(['../'], {relativeTo: this.activatedRoute});
       });
     } else {
       this.router.navigate(['../../'], {relativeTo: this.activatedRoute});

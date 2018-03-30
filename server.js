@@ -4,6 +4,10 @@ const app = express();
 const path = require('path');
 const http = require('http');
 
+var mongoose = require('mongoose');
+var connectionString = 'mongodb://shua:shua@ds263847.mlab.com:63847/webdev';
+mongoose.connect(connectionString);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

@@ -21,32 +21,32 @@
     <form (ngSubmit) = "updateOrCreate()" #f = "ngForm">
       <div class = "form-group">
         <label class="normal-font" for = "heading-name">Name</label>
-          <input [(ngModel)] = "name"
+          <input [(ngModel)] = "widget.name"
                  class = "form-control"
                  name="name"
                  placeholder = ""
                  type="text"/>
         <label class="normal-font" for = "text">Text</label>
-          <input [(ngModel)] = "text"
+          <input [(ngModel)] = "widget.text"
                  class = "form-control"
                  name="text"
                  placeholder = "{{text}}"
                  type="text"/>
         <label class="normal-font" for = "heading-size">Size</label>
-          <input [(ngModel)] = "size"
+          <input [(ngModel)] = "widget.size"
                  class = "form-control"
                  name="size"
                  placeholder = "{{size}}"
                  type="text"/>
       </div>
     </form>
-    <a class = "btn btn-danger btn-block" (click) = "delete()" routerLink="../">Delete</a>
+    <a class = "btn btn-danger btn-block" (click) = "delete()">Delete</a>
   </div>
 
   <nav class = "navbar navbar-default navbar-fixed-bottom">
     <div class = "container-fluid">
       <p class = "navbar-text pull-right">
-        <a class = "navbar-link icon-padding" routerLink="../../../../../..">
+        <a class = "navbar-link icon-padding" routerLink="/user/{{userId}}">
           <span class = "glyphicon glyphicon-user text-primary"></span>
         </a>
       </p>

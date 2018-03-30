@@ -2,15 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {WidgetService} from '../../../services/widget.service.client';
 import {DomSanitizer} from '@angular/platform-browser';
-import {Widget} from '../../../models/widget.model.client';
 
 @Component({
   selector: 'app-widget-list',
   templateUrl: './widget-list.component.html',
-  styleUrls: ['../../../app.component.css']
+  styleUrls: ['./widget-list.component.css']
 })
 export class WidgetListComponent implements OnInit {
-  widgets = [];
+  widgets = [{_id: undefined, name: '', type: '', text: ''}];
   pageId: String;
 
   constructor(private domSanitizer: DomSanitizer, private widgetService: WidgetService, private activatedRoute: ActivatedRoute) {
@@ -24,9 +23,10 @@ export class WidgetListComponent implements OnInit {
     this.activatedRoute.params
       .subscribe(
         params => {
-          return this.widgetService.findWidgetsByPageId(params['pid']).subscribe((returnWidgets: Widget[]) => {
+          return this.widgetService.findWidgetsByPageId(params['pid']).subscribe((returnWidgets: any) => {
             this.pageId = params['pid'];
             this.widgets = returnWidgets;
+            console.log(this.widgets);
           });
         }
       );

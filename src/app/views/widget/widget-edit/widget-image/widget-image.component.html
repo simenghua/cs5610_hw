@@ -25,22 +25,22 @@
                  id = "image-name"
                  placeholder = "Name"/>
         <label class="normal-font" for = "text">Text</label>
-         <input  [(ngModel)] = "imageText"
+         <input  [(ngModel)] = "widget.text"
                  class = "form-control"
                  name="imageText"
                  placeholder = "{{text}}"
                  type="text"
          />
         <label class="normal-font" for = "url">URL</label>
-         <input  [(ngModel)] = "imageUrl"
-                  value="{{imageUrl}}"
+         <input  [(ngModel)] = "widget.url"
+                  value="{{url}}"
                  class = "form-control"
                  name="imageUrl"
-                 placeholder = "{{imageUrl}}"
+                 placeholder = "{{url}}"
                  type="url"
          />
         <label class="normal-font" for = "youtube-width">Width</label>
-         <input  [(ngModel)] = "imageWidth"
+         <input  [(ngModel)] = "widget.width"
                  class = "form-control"
                  name="imageWidth"
                  placeholder = "{{width}}"
@@ -53,17 +53,19 @@
           <input  name="websiteId" value="{{websiteId}}"   style="display: none"/>
           <input  name="pageId" value="{{pageId}}"   style="display: none"/>
           <input  name="userId" value="{{userId}}"   style="display: none"/>
+          <br>
           <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
          </form>
       </div>
     </form>
-    <button class = "btn btn-danger btn-block" (click) = "delete()" routerLink="../">Delete</button>
+    <button class = "btn btn-success btn-block" [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widgetId, 'flickr']">Search Flickr Image</button>
+    <button class = "btn btn-danger btn-block" (click) = "delete()">Delete</button>
   </div>
 
   <nav class = "navbar navbar-default navbar-fixed-bottom">
     <div class = "container-fluid">
       <p class = "navbar-text pull-right">
-        <a class = "navbar-link icon-padding" routerLink="../../../../../../">
+        <a class = "navbar-link icon-padding" routerLink="/user/{{userId}}">
           <span class = "glyphicon glyphicon-user text-primary"></span>
         </a>
       </p>

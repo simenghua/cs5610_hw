@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {UserService} from '../../../services/user.service.client';
-import {User} from '../../../models/user.model.client';
 
 
 @Component({
@@ -25,7 +24,7 @@ export class LoginComponent implements OnInit {
     this.password = this.loginForm.value.password;
 
     this.userService.findUserByCredential(this.username, this.password)
-      .subscribe((user: User) => {
+      .subscribe((user: any) => {
           this.router.navigate(['/user', user._id]); },
       (error: 404) => {
           this.errorFlag = true;

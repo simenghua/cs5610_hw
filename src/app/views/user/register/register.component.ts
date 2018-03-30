@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {UserService} from '../../../services/user.service.client';
 import {Router} from '@angular/router';
-import {User} from '../../../models/user.model.client';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +15,7 @@ export class RegisterComponent implements OnInit {
   verifiedPassword: String;
   errorFlag: boolean;
   errorMsg: String;
-
+  user = {_id: undefined, username: '', password: '', firstname: '', lastname: '', email: '', phone: ''};
   constructor(private userService: UserService, private router: Router) {
   }
 
@@ -27,10 +26,11 @@ export class RegisterComponent implements OnInit {
     if (this.password !== this.verifiedPassword) {
       this.errorFlag = true;
     } else {
-      const user = new User('', this.username, this.password, '', '', '');
-      this.userService.createUser(user).subscribe((returnUser: User) => {
-        this.router.navigate(['/user', returnUser._id]);
-      });
+          this.userService.createUser(this.user).subscribe((userFromServer: any) => {
+            this.user = userFromServer;
+            this.user._id = userFromServer._id;
+            this.router.navigate(['/user', userFromServer._id]);
+          });
     }
   }
 

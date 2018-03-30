@@ -30,36 +30,30 @@
                  class = "form-control"
                  id = "youtube-text"
                  placeholder = "Text"
-                 ngModel
-                 required
-                 #youtubeText = "ngModel"/>
+                 [(ngModel)] = "widget.text"/>
         <label class="normal-font" for = "url">URL</label>
           <input name = "youtubeUrl"
                  type = "text"
                  class = "form-control"
                  id = "youtube-url"
                  placeholder = "{{widget.url}}"
-                 ngModel
-                 required
-                 #youtubeUrl = "ngModel"/>
+                 [(ngModel)] = "widget.url"/>
         <label class="normal-font" for = "youtube-width">Width</label>
           <input name = "youtubeWidth"
                  type = "text"
                  class = "form-control"
                  id = "youtube-width"
                  placeholder= "100%"
-                 ngModel
-                 required
-                 #youtubeWidth = "ngModel"/>
+                 [(ngModel)] = "widget.width"/>
       </div>
     </form>
-    <a class = "btn btn-danger btn-block" (click) = "delete()" routerLink="../">Delete</a>
+    <a class = "btn btn-danger btn-block" (click) = "delete()">Delete</a>
   </div>
 
   <nav class = "navbar navbar-default navbar-fixed-bottom">
     <div class = "container-fluid">
       <p class = "navbar-text pull-right">
-        <a class = "navbar-link icon-padding" routerLink="../../../../../..">
+        <a class = "navbar-link icon-padding" routerLink="/user/{{userId}}">
           <span class = "glyphicon glyphicon-user text-primary"></span>
         </a>
       </p>

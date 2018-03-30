@@ -1,4 +1,3 @@
-import {User} from '../models/user.model.client';
 import {Injectable} from '@angular/core';
 import 'rxjs/Rx';
 import {environment} from '../../environments/environment';
@@ -11,7 +10,7 @@ export class UserService {
 
   baseUrl = environment.baseUrl;
 
-  createUser(user: User) {
+  createUser(user) {
     const url = this.baseUrl + '/api/user';
     return this.http.post(url, user).map((response: Response) => {
       return response.json();

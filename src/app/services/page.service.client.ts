@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Page} from '../models/page.model.client';
 import {Http, Response} from '@angular/http';
 import {environment} from '../../environments/environment';
 @Injectable()
@@ -7,7 +6,7 @@ export class PageService {
   constructor(private http: Http) {
   }
   baseUrl = environment.baseUrl;
-  createPage(websiteId: String, page: Page) {
+  createPage(websiteId: String, page) {
     const url = this.baseUrl + '/api/website/' + websiteId + '/page';
     return this.http.post(url, page).map((response: Response) => {
       return response.json();
@@ -28,7 +27,7 @@ export class PageService {
     });
   }
 
-  updatePage(pageId: String, page: Page) {
+  updatePage(pageId: String, page) {
     const url = this.baseUrl + '/api/page/' + pageId;
     return this.http.put(url, page).map((response: Response) => {
       return response.json();
