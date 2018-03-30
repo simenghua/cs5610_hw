@@ -6,7 +6,7 @@ const http = require('http');
 
 var mongoose = require('mongoose');
 var connectionString = 'mongodb://admin:admin@ds263847.mlab.com:63847/heroku_7rf1hhrg';
-mongoose.connect(connectionString);
+mongoose.creatConnect(connectionString);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
