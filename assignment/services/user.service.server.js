@@ -36,7 +36,7 @@ module.exports = function (app) {
         if (user) {
           res.json(user);
         } else {
-          res.error.send('0');
+          res.sendStatus(400).send('0');
         }
       },
       function (err) {
@@ -52,7 +52,7 @@ module.exports = function (app) {
         if (user) {
           res.json(user);
         } else {
-          res.error.send('0');
+          res.sendStatus(400).send('0');
         }
       },
       function (err) {
@@ -68,7 +68,7 @@ module.exports = function (app) {
         if (user) {
           res.json(user);
         } else {
-          res.error.send('0');
+          res.sendStatus(400).send('0');
         }
       },
       function(err) {
@@ -86,7 +86,7 @@ module.exports = function (app) {
         if (user) {
           res.json(user);
         } else {
-          res.error.send('0');
+          res.sendStatus(400).send('0');
         }
       },
       function(err) {
@@ -105,7 +105,7 @@ module.exports = function (app) {
         if (user) {
           res.json(user);
         } else {
-          res.error.send();
+          res.sendStatus(400).send('0');
         }
       });
       return;
@@ -114,7 +114,7 @@ module.exports = function (app) {
         if (user) {
           res.json(user);
         } else {
-          res.error.send();
+          res.sendStatus(400).send('0');
         }
       });
       return;
@@ -130,7 +130,7 @@ module.exports = function (app) {
         if (user) {
           res.json(user);
         } else {
-          res.error.send();
+          res.sendStatus(400).send('0');
         }
       },
       function (err) {

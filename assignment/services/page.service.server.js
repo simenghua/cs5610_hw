@@ -21,7 +21,7 @@ module.exports = function(app){
         if (page) {
           res.json(page);
         } else {
-          res.error.send('0');
+          res.sendStatus(400).send('0');
         }
       },
       function (err) {
@@ -38,7 +38,7 @@ module.exports = function(app){
         res.json(page);
       },
       function (err) {
-        res.error.send('0');
+        res.sendStatus(400).send(err);
       }
     );
   }
