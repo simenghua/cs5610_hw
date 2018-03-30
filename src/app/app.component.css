@@ -43,3 +43,8 @@ a:link{
   z-index: 100;
   position: relative;
 }
+
+.container-outer {
+  padding-bottom: 65px;
+  overflow: auto;
+}

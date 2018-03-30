@@ -18,3 +18,8 @@ input{
 a:link{
   text-decoration: none;
 }
+
+.container {
+  padding-bottom: 65px;
+  overflow: auto;
+}

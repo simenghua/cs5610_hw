@@ -4,7 +4,7 @@ module.exports = function (app) {
   var multer = require('multer');
   var upload = multer({dest: __dirname + '/../../src/assets/uploads'});
 
-//   var baseUrl = "http://localhost:3100"; // for local
+//  var baseUrl = "http://localhost:3100"; // for local
   var baseUrl = "https://cs5610-webdev-shua.herokuapp.com"; // for development
 
   app.post("/api/page/:pageId/widget", createWidget);
