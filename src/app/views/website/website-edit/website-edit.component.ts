@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WebsiteService} from '../../../services/website.service.client';
 import {NgForm} from '@angular/forms';
+import {SharedService} from '../../../services/shared.service';
 
 
 @Component({
@@ -13,17 +14,18 @@ export class WebsiteEditComponent implements OnInit {
 
   @ViewChild('f') websiteForm: NgForm;
   errorFlag: Boolean;
-  error: String;
+  errorMsg: String;
   wid: String;
   website: {_id: '', name: '', description: '', developmentId: ''};
   userId: String;
   name: String;
   websites: [{_id: '', name: ''}];
-  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute,
+              private router: Router, private sharedService: SharedService) { }
 
   delete() {
     this.websiteService.deleteWebsite(this.wid).subscribe(
-      (data: any) => this.router.navigate(['/user', this.userId, 'website'])
+      (data: any) => this.router.navigate(['/user', 'website'])
     );
   }
 
@@ -37,17 +39,17 @@ export class WebsiteEditComponent implements OnInit {
     this.websiteService.updateWebsite(this.wid, this.website).subscribe(
       (website: any) => {
         this.website = website;
-        this.router.navigate(['/user', this.userId, 'website']);
+        this.router.navigate(['/user', 'website']);
       }
     );
   }
 
   ngOnInit() {
     this.errorFlag = false;
-    this.error = 'Enter the name of the website';
+    this.errorMsg = 'Enter the name of the website';
     this.activatedRoute.params.subscribe(
       (params: any) => {
-        this.userId = params['uid'];
+        this.userId = this.sharedService.user['_id'];
         this.websiteService.findWebsiteByUser(this.userId).subscribe(
           (returnwebsites: any) => {
             this.websites = returnwebsites;

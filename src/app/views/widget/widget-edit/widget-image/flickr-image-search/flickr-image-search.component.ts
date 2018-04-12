@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WidgetService} from '../../../../../services/widget.service.client';
 import {FlickrService} from '../../../../../services/flickr.service.client';
+import {SharedService} from '../../../../../services/shared.service';
 
 
 @Component({
@@ -14,41 +15,45 @@ export class FlickrImageSearchComponent implements OnInit {
   websiteId: string;
   pageId: string;
   userId: string;
-  widgetId: string;
-  widget = {type: 'Image'};
+  widgetId: String;
+  widget = {type: 'Image', name: ''};
   photos: [any] = [{photo: ''}];
-  error: string;
+  errorMsg: string;
+  errorFlag: boolean;
   searchText: string;
 
   constructor(private flickrService: FlickrService,
               private widgetService: WidgetService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private sharedService: SharedService) { }
 
   ngOnInit() {
+    this.errorFlag = false;
+    this.errorMsg = 'Enter the name of the widget';
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
           this.websiteId = params['wid'];
           this.pageId = params['pid'];
           this.widgetId = params['wgid'];
-          this.userId = params['uid'];
+          this.userId = this.sharedService.user['_id'];
         }
       );
   }
 
   searchPhotos() {
-    this.flickrService
-      .searchPhotos(this.searchText)
-      .subscribe(
-        (data: any) => {
-          let val = data._body;
-          val = val.replace('jsonFlickrApi(', '');
-          val = val.substring(0, val.length - 1);
-          val = JSON.parse(val);
-          this.photos = val.photos;
-        }
-      );
+      this.flickrService
+        .searchPhotos(this.searchText)
+        .subscribe(
+          (data: any) => {
+            let val = data._body;
+            val = val.replace('jsonFlickrApi(', '');
+            val = val.substring(0, val.length - 1);
+            val = JSON.parse(val);
+            this.photos = val.photos;
+          }
+        );
   }
 
   selectPhoto(photo) {
@@ -61,26 +66,25 @@ export class FlickrImageSearchComponent implements OnInit {
       pageId : this.pageId,
       url: url
     };
-
-    // console.log(this.widgetId);
-    console.log(this.widgetId === 'undefined');
+    console.log(this.widgetId);
     if (this.widgetId !== 'undefined') {
       this.widgetService.updateWidget(this.widgetId, widget).subscribe(
           (data: any) => {
             const result = data;
             if (result) { this.router.navigate(
-              ['/user/' + this.userId + '/website/' + this.websiteId + '/page/' + this.pageId + '/widget/' + this.widgetId]);
+              ['/user/' + '/website/' + this.websiteId + '/page/' + this.pageId + '/widget/' + this.widgetId]);
             } else {
-              this.error = 'failed!';
+              this.errorMsg = 'failed!';
             }
           }
         );
     } else {
       this.widgetService.createWidget(this.pageId, widget).subscribe((returnWidget: any) => {
         this.widget = returnWidget;
+        this.widgetId = returnWidget._id;
         console.log(this.widget);
         this.router.navigate(
-          ['../../'], {relativeTo: this.activatedRoute});
+          ['/user/' + '/website/' + this.websiteId + '/page/' + this.pageId + '/widget/' + this.widgetId]);
       });
     }
   }

@@ -15,6 +15,9 @@
 
 <!--!!Material on the page!!-->
 <div class = "container-fluid">
+    <div *ngIf="errorFlag" class="alert alert-danger">
+      {{errorMsg}}
+    </div>
   <div class="input-group">
     <input [(ngModel)]="searchText" type="text" class="form-control">
     <span class="input-group-btn">
@@ -39,7 +42,7 @@
   <nav class = "navbar navbar-default navbar-fixed-bottom">
     <div class = "container-fluid">
       <p class = "navbar-text pull-right">
-        <a class = "navbar-link icon-padding" routerLink="/user/{{userId}}">
+        <a class = "navbar-link icon-padding" routerLink="/user">
           <span class = "glyphicon glyphicon-user text-primary"></span>
         </a>
       </p>

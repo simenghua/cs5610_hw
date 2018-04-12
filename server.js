@@ -8,6 +8,20 @@ var mongoose = require('mongoose');
 var connectionString = 'mongodb://shua:shua@ds263847.mlab.com:63847/heroku_7rf1hhrg';
 mongoose.connect(connectionString);
 
+const passport      = require('passport');
+const cookieParser  = require('cookie-parser');
+const session       = require('express-session');
+
+app.use(session({
+  secret: 'this is the secret',
+  resave: true,
+  saveUninitialized: true
+}));
+
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

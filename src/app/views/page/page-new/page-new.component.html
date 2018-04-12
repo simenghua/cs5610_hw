@@ -17,11 +17,16 @@
   </nav>
 
   <div class="container-fluid">
+
+    <div *ngIf="errorFlag" class="alert alert-danger">
+      {{errorMsg}}
+    </div>
+
     <form (ngSubmit)="newPage()" #f="ngForm">
       <div class="form-group">
         <label for="page-name">Name</label>
         <input type="text" class="form-control" id="page-name" placeholder="Page Name"
-               name="name" [(ngModel)] = "page.name"/>
+               name="name" [(ngModel)] = "page.name" ngModel required/>
  <!--        <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
                Name is required
          </div>
@@ -38,7 +43,7 @@
   <nav class = "navbar navbar-default navbar-fixed-bottom">
     <div class = "container-fluid">
       <p class = "navbar-text pull-right">
-        <a class = "navbar-link" routerLink="../../../../">
+        <a class = "navbar-link" routerLink="/user">
           <span class = "glyphicon glyphicon-user text-primary"></span>
         </a>
       </p>

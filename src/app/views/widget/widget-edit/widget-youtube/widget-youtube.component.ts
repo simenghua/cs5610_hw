@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SharedService} from '../../../../services/shared.service';
 
 @Component({
   selector: 'app-widget-youtube',
@@ -14,21 +15,26 @@ export class WidgetYoutubeComponent implements OnInit {
   userId: String;
   pageId: String;
   wgid: String;
-  widget = {type: 'YouTube'};
+  widget = {type: 'YouTube', name: ''};
   text: String;
   url: String;
   width: String;
+  errorMsg: String;
+  errorFlag: Boolean;
 
-  constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute,
+              private router: Router, private sharedSerive: SharedService) {
   }
 
   ngOnInit() {
+    this.errorFlag = false;
+    this.errorMsg = 'Enter the name of the widget';
     this.activatedRoute.params
       .subscribe(
         params => {
           this.wgid = params['wgid'];
           this.pageId = params['pid'];
-          this.userId = params['uid'];
+          this.userId = this.sharedSerive.user['_id'];
         }
       );
     if (this.wgid !== undefined) {
@@ -42,16 +48,21 @@ export class WidgetYoutubeComponent implements OnInit {
 
 
   updateOrCreate() {
-    if (this.wgid !== undefined) {
-      return this.widgetService.updateWidget(this.wgid, this.widget).subscribe((returnWidget: any) => {
-        this.router.navigate(['../'], {relativeTo: this.activatedRoute});
-      });
+    if (this.widget.name === '') {
+      this.errorFlag = true;
     } else {
-      return this.widgetService.createWidget(this.pageId, this.widget).subscribe((returnWidget: any) => {
-        this.widget = returnWidget;
-        this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
-      });
+      if (this.wgid !== undefined) {
+        return this.widgetService.updateWidget(this.wgid, this.widget).subscribe((returnWidget: any) => {
+          this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+        });
+      } else {
+        return this.widgetService.createWidget(this.pageId, this.widget).subscribe((returnWidget: any) => {
+          this.widget = returnWidget;
+          this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
+        });
+      }
     }
+
   }
 
   delete() {

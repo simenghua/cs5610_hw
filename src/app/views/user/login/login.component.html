@@ -1,6 +1,6 @@
 <div *ngIf="errorFlag"
      class="alert alert-danger">
-  {{errorMsg}}
+  <p>{{errorMsg}}</p>
 
 </div>
 
@@ -28,6 +28,10 @@
       </span>
       <button class = "btn btn-primary btn-block" type="submit" [disabled]="!f.valid">Login</button>
       <button routerLink="/register" class = "btn btn-success btn-block">Register</button>
+      <a href="/facebook/login" class="btn btn-primary btn-block">
+          <span class="fa fa-facebook"></span>
+          Facebook
+      </a>
 
 
     </form>

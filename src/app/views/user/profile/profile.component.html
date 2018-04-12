@@ -46,8 +46,8 @@
     </div>
 
     <br/>
-    <button routerLink="/user/{{userId}}/website" class="btn btn-primary btn-block">Websites</button>
-    <button routerLink="/login" (click)="delete()" class="btn btn-danger btn-block text-white">Delete</button>
+    <button routerLink="/user/website" class="btn btn-primary btn-block">Websites</button>
+    <button (click)="delete()" class="btn btn-danger btn-block text-white">Delete</button>
     <button routerLink="/login" class="btn btn-success btn-block">Log Out</button>
 
   </form>
@@ -57,7 +57,7 @@
 <nav class="navbar bg-primary navbar-fixed-bottom">
     <div class="container-fluid">
        <p class="navbar-text pull-right">
-          <a routerLink="/user/{{userId}}" class="navbar-link white-color">
+          <a routerLink="/user" class="navbar-link white-color">
              <span class="glyphicon glyphicon-user"></span>
           </a>
         </p>

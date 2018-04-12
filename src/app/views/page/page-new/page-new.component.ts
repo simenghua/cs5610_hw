@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import {WebsiteService} from '../../../services/website.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PageService} from '../../../services/page.service.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-page-new',
@@ -16,20 +17,21 @@ export class PageNewComponent implements OnInit {
   name: String;
   title: String;
   userId: String;
-  errFlag: Boolean;
-  error: String;
+  errorFlag: Boolean;
+  errorMsg: String;
   page = {_id: undefined, name: '', title: ''};
 
-  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute,
+              private router: Router, private sharedService: SharedService) {
   }
 
   ngOnInit() {
-    this.errFlag = false;
-    this.error = 'Enter the name of the page';
+    this.errorFlag = false;
+    this.errorMsg = 'Enter the name of the page';
     this.activatedRoute.params
       .subscribe(
         params => {
-          this.userId = params['uid'];
+          this.userId = this.sharedService.user['_id'];
           this.websiteId = params['wid'];
         }
       );
@@ -37,13 +39,13 @@ export class PageNewComponent implements OnInit {
 
   newPage() {
     if (this.page.name === '') {
-      this.errFlag = true;
+      this.errorFlag = true;
     } else {
       this.pageService.createPage(this.websiteId, this.page)
         .subscribe(
           (data: any) => {
             this.page = data;
-           this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+           this.router.navigate(['/user', 'website', this.websiteId, 'page']);
            }
         );
     }

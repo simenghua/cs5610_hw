@@ -40,7 +40,7 @@ module.exports = function (app) {
     var pageId = req.body.pageId;
 
     if (myFile == null) {
-      res.redirect(baseUrl + "/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+      res.redirect(baseUrl + "/user/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
       return;
     }
 
@@ -64,26 +64,21 @@ module.exports = function (app) {
       newWidget.type='Image';
       newWidget.pageId = pageId;
       newWidget.url = '/uploads/' + filename;
-      newWidget._id = widgetId;
       newWidget.width = width;
       widgetModel.findAllWidgetsForPage(pageId).then(function (widgets) {
         newWidget.position = widgets.length;
         widgetModel.createWidget(pageId, newWidget).then(function (widget) {
-          this.widgetId = widget._id;
+          widgetId = widget._id;
+          res.redirect(baseUrl + "/user/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
         });
       });
     } else {
       var imageUrl = '/uploads/' + filename;
       var widget = {url: imageUrl};
       widgetModel.updateWidget(widgetId, widget).then(function (stats) {
-            res.send(200);
+            res.redirect(baseUrl + "/user/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
           });
     }
-
-    res.redirect(baseUrl + "/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId)
-
-
-
   }
 
   function reorderWidgets(req, res) {
@@ -96,7 +91,7 @@ module.exports = function (app) {
         res.sendStatus(200);
       },
       function (err) {
-        res.sendStatus(400).send("hello 1");
+        res.sendStatus(400).send("hello");
       });
   }
 

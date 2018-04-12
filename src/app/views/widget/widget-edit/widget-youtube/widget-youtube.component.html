@@ -17,13 +17,18 @@
   </nav>
 
   <div class = "container-fluid">
+    <div *ngIf="errorFlag" class="alert alert-danger">
+      {{errorMsg}}
+    </div>
     <form (ngSubmit) = "updateOrCreate()" #f = "ngForm">
       <div class = "form-group">
         <label class="normal-font" for = "youtube-name">Name</label>
-          <input tyle = "text"
+          <input name = "youtubeName"
+                 tyle = "text"
                  class = "form-control"
                  id = "youtube-name"
-                 placeholder = "Name"/>
+                 placeholder = "Name"
+                 [(ngModel)] = "widget.name"/>
         <label class="normal-font" for = "text">Text</label>
           <input name = "youtubeText"
                  type = "text"
@@ -53,7 +58,7 @@
   <nav class = "navbar navbar-default navbar-fixed-bottom">
     <div class = "container-fluid">
       <p class = "navbar-text pull-right">
-        <a class = "navbar-link icon-padding" routerLink="/user/{{userId}}">
+        <a class = "navbar-link icon-padding" routerLink="/user">
           <span class = "glyphicon glyphicon-user text-primary"></span>
         </a>
       </p>

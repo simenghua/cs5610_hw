@@ -3,7 +3,7 @@
     <div class = "col-lg-4 col-md-4 col-sm-4 hidden-xs">
       <div class="container-fluid">
           <p class="navbar-text pull-left">
-             <a routerLink="/user/{{userId}}/website" class="navbar-link white-color">
+             <a routerLink="/user/website" class="navbar-link white-color">
                 <span class="glyphicon glyphicon-chevron-left"></span>
              </a>
           </p>
@@ -11,7 +11,7 @@
               Websites
           </a>
           <p class="navbar-text pull-right">
-             <a routerLink="/user/{{userId}}/website/new" class="navbar-link white-color icon-padding">
+             <a routerLink="/user/website/new" class="navbar-link white-color icon-padding">
              <span class="glyphicon glyphicon-plus"></span>
              </a>
           </p>
@@ -21,7 +21,7 @@
     <div class = "col-lg-8 col-xs-12 col-sm-8 col-md-8">
      <div class="container-fluid">
         <p class="navbar-text pull-left">
-           <a routerLink="/user/{{userId}}/website" class="navbar-link white-color hidden-sm hidden-md hidden-lg">
+           <a routerLink="/user/website" class="navbar-link white-color hidden-sm hidden-md hidden-lg">
            <span class="glyphicon glyphicon-chevron-left"></span>
            </a>
         </p>
@@ -44,14 +44,19 @@
   <div *ngFor = "let website of websites" >
       <ul class = "list-group">
         <li class="list-group-item hideborder">
-          <a routerLink="/user/{{userId}}/website/{{website._id}}/page">{{website.name}}</a>
-          <a routerLink="/user/{{userId}}/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
+          <a routerLink="/user/website/{{website._id}}/page">{{website.name}}</a>
+          <a routerLink="/user/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
         </li>
       </ul>
   </div>
   </div>
 
 <div class = "col-xs-12 col-lg-8 col-sm-8 col-md-8">
+
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+
   <form>
     <div class = "form-group">
       <label for = "website-name">Name</label>
@@ -75,7 +80,7 @@
 <nav class="navbar bg-primary navbar-fixed-bottom">
     <div class="container-fluid">
        <p class="navbar-text pull-right">
-          <a routerLink="/user/{{userId}}" class="navbar-link white-color">
+          <a routerLink="/user" class="navbar-link white-color">
              <span class="glyphicon glyphicon-user"></span>
           </a>
         </p>

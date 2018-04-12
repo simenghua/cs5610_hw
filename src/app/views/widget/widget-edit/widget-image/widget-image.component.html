@@ -17,13 +17,18 @@
   </nav>
 
   <div class = "container-fluid">
+    <div *ngIf="errorFlag" class="alert alert-danger">
+      {{errorMsg}}
+    </div>
     <form (ngSubmit) = "updateOrCreate()" #f = "ngForm">
       <div class = "form-group">
-        <label class="normal-font" for = "youtube-name">Name</label>
-         <input tyle = "text"
+        <label class="normal-font" for = "image-name">Name</label>
+         <input  [(ngModel)] = "widget.name"
+                 name = "name"
+                 type = "text"
                  class = "form-control"
                  id = "image-name"
-                 placeholder = "Name"/>
+                 placeholder = {{name}}/>
         <label class="normal-font" for = "text">Text</label>
          <input  [(ngModel)] = "widget.text"
                  class = "form-control"
@@ -58,14 +63,14 @@
          </form>
       </div>
     </form>
-    <button class = "btn btn-success btn-block" [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widgetId, 'flickr']">Search Flickr Image</button>
+    <button class = "btn btn-success btn-block" [routerLink]="['/user', 'website', websiteId, 'page', pageId, 'widget', widgetId, 'flickr']">Search Flickr Image</button>
     <button class = "btn btn-danger btn-block" (click) = "delete()">Delete</button>
   </div>
 
   <nav class = "navbar navbar-default navbar-fixed-bottom">
     <div class = "container-fluid">
       <p class = "navbar-text pull-right">
-        <a class = "navbar-link icon-padding" routerLink="/user/{{userId}}">
+        <a class = "navbar-link icon-padding" routerLink="/user/">
           <span class = "glyphicon glyphicon-user text-primary"></span>
         </a>
       </p>

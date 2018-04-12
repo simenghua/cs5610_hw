@@ -11,6 +11,11 @@ var UserSchema = mongoose.Schema({
   dateCreated: {
     type: Date,
     default: Date.now
+  },
+  facebook : {
+    token: String,
+    id: String,
+    displayName : String
   }
 }, {collection: 'user'});
 

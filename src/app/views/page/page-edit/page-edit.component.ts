@@ -14,13 +14,13 @@ export class PageEditComponent implements OnInit {
   pageId: String;
   page = {_id: undefined, name: '', title: ''};
   websiteId: String;
-  errFlag: Boolean;
-  error: String;
+  errorFlag: Boolean;
+  errorMsg: String;
   constructor(private pageService: PageService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   update() {
     if (this.page.name === '') {
-      this.errFlag = true;
+      this.errorFlag = true;
     } else {
       this.pageService.updatePage(this.pageId, this.page)
         .subscribe(
@@ -37,8 +37,8 @@ export class PageEditComponent implements OnInit {
     );
   }
   ngOnInit() {
-    this.errFlag = false;
-    this.error = 'Enter the name of the page';
+    this.errorFlag = false;
+    this.errorMsg = 'Enter the name of the page';
     this.activatedRoute.params.subscribe(params => {
       this.websiteId = params['wid'];
       this.pageId = params['pid'];
