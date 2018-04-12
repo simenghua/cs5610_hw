@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'src/assets')));
 
 //CORS
 app.use(function(reg, res, next){
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "https://cs5610-webdev-shua.herokuapp.com");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE, OPTIONS');
   next();
